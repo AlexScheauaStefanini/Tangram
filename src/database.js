@@ -1,13 +1,11 @@
 const Firebase = require("firebase");
-// let getPlayerPosition = require("./playerPosition");
-
 Firebase.initializeApp({
   serviceAccount: 'tangram-fd551-firebase-adminsdk-an96s-2d814e7d84.json',
   databaseURL: 'https://tangram-fd551.firebaseio.com'
 })
 const db = Firebase.database();
 
-class Database {
+class Database { //class for Firebase interaction
   //get user data from database
   static getUser(name) {
     return db.ref(`users/${name}`).once('value')
