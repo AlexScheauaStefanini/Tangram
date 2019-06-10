@@ -1,0 +1,85 @@
+.game-level-finished {
+  animation: game-level-finished 0.5s;
+}
+
+.game-level-finished-fill #level *{
+  animation: game-level-finished-fill 0.5s;
+  fill-opacity: 1;
+}
+
+@keyframes game-level-finished-fill {
+  0%{
+    fill-opacity: 0;
+  }
+
+  100%{
+    fill-opacity: 1;
+  }
+}
+
+
+.timer-level-finished {
+  animation: timer-level-finished 0.5s;
+  border-color: #CAD400;
+}
+
+@keyframes timer-level-finished {
+  0%{
+    border-color:#0F3255;
+  }
+
+  100%{
+    border-color: #CAD400;
+  }
+}
+
+.next-button-level-finished {
+  display: inline !important;
+  opacity: 0;
+  animation: next-button-level-finished 0.5s;
+  opacity: 1;
+}
+
+@keyframes next-button-level-finished {
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
+
+.drag-container-level-finished *{
+  animation: drag-container-level-finished 0.5s;
+  fill-opacity: 0 !important;
+  stroke-opacity: 0 !important;
+}
+
+@keyframes drag-container-level-finished{
+  0%{
+    fill-opacity: 1;
+    stroke-opacity: 1;
+  }
+
+  100%{
+    fill-opacity: 0;
+    stroke-opacity: 0;
+  }
+}
+
+.stroke-level-finished {
+  animation: stroke-level-finished 0.5s;
+}
+
+@keyframes stroke-level-finished{
+  0%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100%{
+    opacity: 0;
+    transform: translateX(600px);
+  }
+}

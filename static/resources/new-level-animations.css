@@ -1,0 +1,70 @@
+.game-appearing {
+  animation: game-appearing 1s;
+  pointer-events: all;
+}
+@keyframes game-appearing{
+  0%{
+    transform: translateX(-400px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.svg-container-appearing{
+  animation: svg-container-appearing 1s;
+}
+@keyframes svg-container-appearing{
+  0%{
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+/* pentru piesele care sunt rotite 90grade */
+.svg-container-appearing-rotated{
+  animation: svg-container-appearing-rotated 1s;
+}
+@keyframes svg-container-appearing-rotated{
+  0%{
+    transform: translateY(-400px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.stroke-apearing{
+  animation: stroke-apearing 1s;
+  pointer-events: all;
+}
+@keyframes stroke-apearing{
+  0%{
+    transform: translateY(400px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.timer-appearing {
+  animation: timer-appearing 1s;
+}
+@keyframes timer-appearing { 
+  0%{
+      opacity: 0;
+  }
+
+  100%{
+      opacity: 1;
+  }
+}

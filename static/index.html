@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="resources/new-player-animations.css">
+	<link rel="stylesheet" href="resources/new-level-animations.css">
+	<link rel="stylesheet" href="resources/reset-pieces-animations.css">
+	<link rel="stylesheet" href="resources/level-finished-animations.css">
+	<link rel="stylesheet" href="resources/game-finished-animations.css">
+
+	<title>Tangram</title>
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<video autoplay muted loop id="video-background">
+			<source src="resources/video/game-background.mp4" type="video/mp4">
+		</video>
+		<div class="title-container d-flex justify-content-center align-items-center">
+			<span class="title logo">TAN</span><span class="title">GRAM</span>
+		</div>
+		<!-- input pentru numele playerului -->
+		<div class="removable-container d-flex align-items-center flex-column">
+			<div class="player-input-container d-flex flex-column align-items-center">
+				<p class="player-input-info">TIP: You should select an unique nickname and remember it since your game
+					progresion will be saved with your nickname!</p>
+				<input id="player-nickname-input" type="text" placeholder="Please Enter your nickname" value="a" autofocus>
+			</div>
+
+			<div class="d-flex flex-column align-items-center">
+				<p class="game-tutorial">Complete the puzzle by moving and rotating the seven outlined shapes.</p>
+				<p class="game-tutorial">Shapes can't overlap or go outside of the lines.</p>
+				<p class="game-tutorial">There is only one way to finish the puzzle for each level</p>
+				<p class="game-tutorial">Have fun!</p>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<button type="button" class="btn-play" onclick="nameAddedAnimation();">
+					<!-- createPlayer();dragElements(); -->
+					<i class="fas fa-play"></i>
+				</button>
+			</div>
+		</div>
+		<!-- NavBar -->
+		<div class="nav d-flex justify-content-center">
+			<p class="btn btn-name">Alex Scheaua</p>
+			<p class="btn btn-level"></p>
+			<button class="btn" onclick="resetPieces();">Reset</button>
+			<!--  -->
+		</div>
+
+
+		<div class="timer-nextlevel d-flex justify-content-center">
+			<div class="timer-container d-flex justify-content-center align-items-center">
+				<p id="timer">Timer</p>
+			</div>
+			<button class="btn" id="next-level">Next Level</button>
+		</div>
+
+		<!-- Joc -->
+		<div class="game-container d-flex justify-content-center flex-wrap">
+			<div id="game"></div>
+
+			<div class="stroke-container d-flex flex-column align-items-center">
+				<div id="stroke"></div>
+			</div>
+
+			<div id="drag-container">
+
+				<div class="piece" style="transform:rotate(0deg)">
+					<svg xmlns="http://www.w3.org/2000/svg" id="big-t" width="200" height="100" viewBox="0 0 200 100">
+						<polygon points="100 100 200 0 0 0 100 100" /></svg>
+				</div>
+				<div class="piece" style="transform:rotate(0deg)">
+					<svg xmlns="http://www.w3.org/2000/svg" id="big-" width="200" height="100" viewBox="0 0 200 100">
+						<polygon points="100 100 200 0 0 0 100 100" /></svg>
+				</div>
+				<div class="piece" style="transform:rotate(0deg)">
+					<svg xmlns="http://www.w3.org/2000/svg" id="med-t" width="100" height="100" viewBox="0 0 100 100">
+						<polygon points="0 100 100 100 0 0 0 100" /></svg>
+				</div>
+				<div class="piece" style="transform:rotate(0deg)">
+					<svg xmlns="http://www.w3.org/2000/svg" id="para" width="150" height="50" viewBox="0 0 150 50">
+						<path d="M100,50H0L50,0H150Z" /></svg></div>
+				<div class="piece" style="transform:rotate(0deg)">
+					<svg xmlns="http://www.w3.org/2000/svg" id="small-t" width="100" height="50" viewBox="0 0 100 50">
+						<polygon points="50 0 0 50 100 50 50 0" /></svg>
+				</div>
+				<div class="piece" style="transform:rotate(0deg)">
+					<svg xmlns="http://www.w3.org/2000/svg" id="small-" width="100" height="50" viewBox="0 0 100 50">
+						<polygon points="50 0 0 50 100 50 50 0" /></svg>
+				</div>
+				<div class="piece" style="transform:rotate(0deg)">
+					<svg xmlns="http://www.w3.org/2000/svg" id="square" width="100" height="100" viewBox="0 0 100 100">
+						<rect x="14.64" y="14.64" width="70.71" height="70.71" transform="translate(-20.71 50) rotate(-45)" /></svg>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+		<linearGradient id="piece-gradient" x2="1" y2="1">
+			<stop offset="0%" stop-color="#518DB2" />
+			<stop offset="75%" stop-color="#0F3255" />
+		</linearGradient>
+	</svg>
+
+	<script src="resources/external/svg-inject.min.js"></script>
+	<script src="resources/new-player-animations.js"></script>
+	<script src="resources/new-level-animations.js"></script>
+	<script src="main.js"></script>
+	<script src="levels.js"></script>
+	<script src="resources/api-requests.js"></script>
+	<script src="resources/external/displace.min.js"></script>
+	<script src="pieces-manipulation.js"></script>
+	<script src="validation.js"></script>
+	<script src="scoring.js"></script>
+	<script src="resources/reset-pieces-animations.js"></script>
+	<script src="resources/level-finished-animations.js"></script>
+	<script src="resources/game-finished.js"></script>
+</body>
+
+</html>
+
+<!-- Leaderboard - fiecare nivel - nr nivele -->
+<!-- login cu PIN`code -->
+<!-- stroke centrat restul inline -->

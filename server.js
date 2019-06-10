@@ -1,15 +1,10 @@
 const Database = require('./src/database');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 app.use(express.json());
-
-//Allow cors
-app.all('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "*");
-  res.header("Access-Control-Allow-Methods","*");
-  next();
-});
+app.use(express.static('static'));
+app.use(cors());
 
 //get user from Firebase
 app.get('/api/users/:name', async (req, res) => {
