@@ -37,7 +37,7 @@ class Player {
     this.gamesFinished.forEach((levelFinished)=>{
       avgTime += levelFinished.timeScore;
     })
-    return parseFloat(avgTime / this.gamesFinished.length);
+    return parseFloat(avgTime / this.gamesFinished.length).toFixed(2);
   }
 }
 

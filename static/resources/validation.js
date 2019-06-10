@@ -83,7 +83,7 @@ function validateGame() {
 						<i class="fas fa-star d-flex align-self-center"></i>
 						<p class="leaderboard-text">${levelPosition}</p>
 						<p class="leaderboard-text">${player.name}</p>
-						<p class="leaderboard-text">${bestLevelTime}</p>
+						<p class="leaderboard-text">${leaderboardSecondsToMinutes(bestLevelTime)}</p>
 					</li>
 						`
 					} else {
