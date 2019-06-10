@@ -75,7 +75,21 @@ function validateGame() {
 				.then((response)=> {
 					bestLevelTime = response;
 				})
-				.then(()=>console.log(`your time: ${currentLevelTime} your best time: ${bestLevelTime} your position: ${levelPosition}`));
+				.then(()=>{
+					// console.log(`your time: ${currentLevelTime} your best time: ${bestLevelTime} your position: ${levelPosition}`)
+					if(levelPosition > 10){
+						document.querySelector('.leaderboard.player').innerHTML = `
+						<li class="leaderboard-entry d-flex">
+						<i class="fas fa-star d-flex align-self-center"></i>
+						<p class="leaderboard-text">${levelPosition}</p>
+						<p class="leaderboard-text">${player.name}</p>
+						<p class="leaderboard-text">${bestLevelTime}</p>
+					</li>
+						`
+					} else {
+						getLeaderboard();
+					}
+				});
 			})
 			
 			

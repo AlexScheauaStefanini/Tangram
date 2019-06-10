@@ -15,8 +15,8 @@ body {
 
 .wrapper {
     width: 100%;
-    height: 955px;
-    /* background-image: linear-gradient(#030F1E, #082140, #020E1B); */
+    min-height: 955px;
+    overflow: hidden;
 }
 
 #video-background {
@@ -49,6 +49,22 @@ body {
     padding: 18px 0 18px 10px;
     background-color: #CAD400;
     animation: logo-anim 1s;
+}
+
+.title-container a {
+    pointer-events: all; 
+    position: absolute;
+    top: 45px;
+    right: 20px;  
+    display: none; 
+}
+
+.title-star-button{
+    font-size: 20px;
+    padding: 10px;
+    background-color: #CAD400;
+    border-radius: 50%;
+    color: #fff;
 }
 
 /* TITLU */
@@ -291,6 +307,71 @@ button.btn:hover{
 
 /* JOC */
 
+
+/* Leaderboard */
+
+.leaderboard-section {
+    background-color: #fff;
+}
+
+.leaderboard-container {
+    background: url(./resources/leaderboard-background.png) repeat fixed;
+}
+
+.leaderboard-title {
+    margin: 50px 0;
+    font-size: 3rem;
+}
+
+.title-star{
+    height: 100%;
+    font-size: 30px;
+    padding: 15px;
+    position: relative;
+    top: -8px;
+    background-color: #CAD400;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.leaderboard {
+    margin: 50px 0;
+}
+
+.leaderboard li {
+    margin: 20px 0;
+}
+
+.leaderboard li i {
+    width: 0;
+    position: relative;
+    left: 35px;
+    font-size: 1.3rem;
+    color: #518DB2;
+}
+
+.leaderboard li .leaderboard-text {
+    width: 150px;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.leaderboard .first .leaderboard-text{
+    width: 180px;
+    font-size: 3rem;
+}
+
+.leaderboard .second .leaderboard-text{
+    width: 170px;
+    font-size: 2.2rem;
+}
+
+.leaderboard .third .leaderboard-text{
+    width: 150px;
+    font-size: 1.8rem;
+}
+
+/* Leaderboard */
 
 .d-flex {
     display: flex;

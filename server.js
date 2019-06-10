@@ -12,7 +12,7 @@ app.get('/api/users/:name', async (req, res) => {
   if(user){
     res.status(200).send(JSON.stringify(user));
   } else {
-    res.status(404).send("404: User not found");
+    res.status(404).send("");
   }
 })
 

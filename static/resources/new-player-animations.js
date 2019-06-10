@@ -1,5 +1,5 @@
 function nameAddedAnimation() {
-  if (!document.querySelector("#player-nickname-input").value) {
+  if (document.querySelector("#player-nickname-input").value.length < 3 || document.querySelector("#player-nickname-input").value.length > 10) {
     document.querySelector("#player-nickname-input").classList.add('empty-input');
     return;
   } else {
@@ -21,7 +21,7 @@ function nameAddedAnimation() {
 function removeCharacterInterface(game) {
   if (document.querySelector(".btn-play").classList.contains('removeTrue')) {
     document.querySelector(".removable-container").classList.add('remove-new-player-interface');
-
+    document.querySelector(".title-container a").style.display = "inline";
     document.querySelector(".removable-container").addEventListener('animationend', () => {
       document.querySelector(".removable-container").remove(); //sterg containerul in care adaug player nou
       document.querySelector(".nav").classList.add("navbar-appear");

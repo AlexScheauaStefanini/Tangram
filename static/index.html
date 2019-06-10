@@ -13,24 +13,27 @@
 	<link rel="stylesheet" href="resources/reset-pieces-animations.css">
 	<link rel="stylesheet" href="resources/level-finished-animations.css">
 	<link rel="stylesheet" href="resources/game-finished-animations.css">
+	<script src="https://kit.fontawesome.com/1a4913cb5c.js"></script>
 
 	<title>Tangram</title>
 </head>
 
 <body>
 
-	<div class="wrapper">
+	<section class="wrapper">
 		<video autoplay muted loop id="video-background">
 			<source src="resources/video/game-background.mp4" type="video/mp4">
 		</video>
 		<div class="title-container d-flex justify-content-center align-items-center">
 			<span class="title logo">TAN</span><span class="title">GRAM</span>
+			<a href="#leaderboard" title="Leaderboard"><i class="fas fa-star title-star-button"></i></a>
 		</div>
 		<!-- input pentru numele playerului -->
 		<div class="removable-container d-flex align-items-center flex-column">
 			<div class="player-input-container d-flex flex-column align-items-center">
 				<p class="player-input-info">TIP: You should select an unique nickname and remember it since your game
-					progresion will be saved with your nickname!</p>
+					progresion and leaderboard will be saved with your nickname!</p>
+				<p class="player-input-info">Your nickname should be minimum 3 and max 10 characters </p>
 				<input id="player-nickname-input" type="text" placeholder="Please Enter your nickname" value="a" autofocus>
 			</div>
 
@@ -103,7 +106,15 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
+
+	<section class="leaderboard-section">
+		<div class="leaderboard-container d-flex flex-column align-items-center">
+			<p class="leaderboard-title"><i class="fas fa-star title-star"></i>LEADERBOARD</p>
+			<ul id="leaderboard" class="leaderboard d-flex flex-column align-items-center"></ul>
+			<ul class="leaderboard player d-flex flex-column align-items-center"></ul>
+		</div>
+	</section>
 
 	<svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
 		<linearGradient id="piece-gradient" x2="1" y2="1">
@@ -118,6 +129,7 @@
 	<script src="main.js"></script>
 	<script src="levels.js"></script>
 	<script src="resources/api-requests.js"></script>
+	<script src="resources/leaderboard.js"></script>
 	<script src="resources/external/displace.min.js"></script>
 	<script src="pieces-manipulation.js"></script>
 	<script src="validation.js"></script>
