@@ -1,8 +1,7 @@
 
 // // Functie rotate.
 
-document.oncontextmenu = (e) => {
-
+let rotatePieces = (e) => {
 	e.preventDefault(); // prevent rightclick menu
 
 	let possibleRotationArr = ["rotate(0deg)","rotate(45deg)","rotate(90deg)","rotate(135deg)","rotate(180deg)","rotate(225deg)","rotate(270deg)","rotate(315deg)"]
@@ -29,6 +28,9 @@ document.oncontextmenu = (e) => {
 		}
 	}
 }
+
+document.oncontextmenu = rotatePieces;
+document.ondblclick = rotatePieces;
 
 function closeDrag(elmnt) {	
 	validateMove(elmnt);
