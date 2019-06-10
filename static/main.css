@@ -255,6 +255,11 @@ button.btn:hover{
     pointer-events: fill;
     cursor: grab;
     fill-opacity: 0;
+    /* todelete */
+    /* fill-opacity: 1;
+    fill: url(#piece-gradient);
+    stroke: url(#piece-gradient); */
+    /* todelete */
     stroke: #CAD400;
     stroke-width: 1px;
     box-sizing: content-box;
@@ -354,8 +359,8 @@ button.btn:hover{
 .leaderboard li i {
     width: 0;
     position: relative;
-    left: 35px;
-    font-size: 1.3rem;
+    left: -30px;
+    font-size: 1.4rem;
     color: #518DB2;
 }
 

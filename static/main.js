@@ -5,7 +5,6 @@ let gameOffsetY = document.querySelector("#game").offsetTop;
 let dragOffsetX = document.querySelector("#drag-container").offsetLeft;
 let dragOffsetY = document.querySelector("#drag-container").offsetTop;
 
-
 window.onresize = () => {
 	resetOffsets();
 }
@@ -41,6 +40,10 @@ function gameInitialize(game) {
 		levelTimer.stopTimer(); //opresc cronometrul existent
 	}
 
+	// if(typeof game === "number"){
+	// 	currentLevel = game;
+	// } else
+
 	if (game === "new") {
 		player = new Player(player.name);
 		levelTimer = new timer();
@@ -53,13 +56,13 @@ function gameInitialize(game) {
 		currentLevel = player.gamesRemaining[LevelSelector.nextLevel()];
 		levelTimer = new timer();
 		levelTimer.startTimer();
-	}
-
+	} 
+																																									//to uncomment
 	player.setCurrentLevelValidationSet(levels[currentLevel]); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
 
 	document.querySelector('.btn-name').innerText = player.name;
 	if (player.gamesFinished.length === 0) {
-		document.querySelector('.btn-level').innerText = "Tutorial";
+		document.querySelector('.btn-level').innerText = "Puzzle " + currentLevel;;
 	} else {
 		document.querySelector('.btn-level').innerText = "Puzzle " + currentLevel; //(player.gamesFinished.length); currentLevel
 	}
