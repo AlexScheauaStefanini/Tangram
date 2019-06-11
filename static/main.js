@@ -30,7 +30,6 @@ async function createPlayer() {
 		player = new Player(nicknameInput.value);
 		playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
 	}
-
 }
 
 
@@ -62,18 +61,19 @@ function gameInitialize(game) {
 
 	document.querySelector('.btn-name').innerText = player.name;
 	if (player.gamesFinished.length === 0) {
-		document.querySelector('.btn-level').innerText = "Puzzle " + currentLevel;;
+		document.querySelector('.btn-level').innerText = "Tutorial";
 	} else {
 		document.querySelector('.btn-level').innerText = "Puzzle " + currentLevel; //(player.gamesFinished.length); currentLevel
 	}
 
 	try{
-		new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
-		document.querySelector('#game').innerHTML = `<img src="./resources/levels/level${currentLevel}.svg" id="level" onload="SVGInject(this)"></img>`
+		new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));	
 	}
 	catch(err){
 		console.log("ResizeObserver not available");
 	}
+
+	document.querySelector('#game').innerHTML = `<img src="./resources/levels/level${currentLevel}.svg" id="level" onload="SVGInject(this)"></img>`
 
 	resetOffsets();
 	newLevelAnimations();

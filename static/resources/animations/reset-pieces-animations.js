@@ -6,11 +6,24 @@ function resetPieces() {
   for (let i = 0; i < pieces.length; i++) {
     let id = pieces[i].firstElementChild.id;
 
-    resetPiecesCss.addRule(`@keyframes reset-${id}`, `0%{top: ${pieces[i].style.top}; left:${pieces[i].style.left}}; transform:${pieces[i].style.transform}`);
-    resetPiecesCss.addRule(`@keyframes reset-${id}`, `100%{top: ${origins[i].top + dragOffsetY}px; left:${(origins[i].left + stroke.offsetLeft + 100)}px; transform:${origins[i].transform}}`);
+    
+    resetPiecesCss.insertRule(`@keyframes reset-${id}{
+      0%{
+        top: ${pieces[i].style.top}; 
+        left:${pieces[i].style.left}; 
+        transform:${pieces[i].style.transform};
+      }
+      100%{
+        top: ${origins[i].top + dragOffsetY}px; 
+        left:${(origins[i].left + stroke.offsetLeft + 100)}px; 
+        transform:${origins[i].transform};
+      }
+    }`,resetPiecesCss.cssRules.length)
+    
     pieces[i].classList.add(`reset-${id}`);
 
     document.querySelector(`.reset-${id}`).addEventListener('animationend', () => {
+      
       // piesele raman pe locul unde ajung dupa animatie
       pieces[i].style.top = (origins[i].top + dragOffsetY) + "px";
       pieces[i].style.left = (origins[i].left + stroke.offsetLeft + 100) + "px";

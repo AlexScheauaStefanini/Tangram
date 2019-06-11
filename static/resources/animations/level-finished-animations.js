@@ -9,8 +9,11 @@ function levelFinishedAnimations(){
 
   let windowCenter = window.innerWidth/2 - document.querySelector('#game').offsetLeft - document.querySelector('#game').offsetWidth/2;
 
-  levelFinishedCss.addRule(`@keyframes game-level-finished`, `0%{transform: translateX(0);}`);
-  levelFinishedCss.addRule(`@keyframes game-level-finished`, `100%{transform: translateX(calc(${windowCenter}px));}`);
+
+  levelFinishedCss.insertRule(`@keyframes game-level-finished{
+    0%{transform: translateX(0);}
+    100%{transform: translateX(calc(${windowCenter}px));}
+  }`,levelFinishedCss.cssRules.length)
 
   dragContainer.classList.add("drag-container-level-finished");
 
@@ -24,7 +27,7 @@ function levelFinishedAnimations(){
 
   levelSvg.addEventListener('animationend',()=>{
     stroke.style.opacity = 0;
-    nextLevelButton.setAttribute('onclick',"gameInitialize('next');");
+    nextLevelButton.setAttribute('onclick',"gameInitialize('next');removeLevelFinishedAnimations();");
     levelSvg.classList.remove("game-level-finished");
     levelSvg.style.transform = `translateX(calc(${windowCenter}px))`;
   },{once:true})
@@ -33,6 +36,7 @@ function levelFinishedAnimations(){
 
 //sterg clasele de animatie pentru finalizarea nivelului cand incep joc nou.
 function removeLevelFinishedAnimations(){
+
   let levelSvg = document.querySelector("#game");
   let dragContainer = document.querySelector("#drag-container");
   let nextLevelButton = document.querySelector("#next-level");
@@ -46,4 +50,9 @@ function removeLevelFinishedAnimations(){
   timer.classList.remove("timer-level-finished");
   levelSvg.style.transform = `translateX(0px)`;
   nextLevelButton.removeAttribute('onclick');
+
+  let levelFinishedCss = document.styleSheets[5];
+  if(levelFinishedCss.cssRules.length > 10){
+    levelFinishedCss.deleteRule(levelFinishedCss.cssRules.length-1)
+  }
 }

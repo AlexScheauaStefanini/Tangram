@@ -1,5 +1,4 @@
 function newLevelAnimations(){
-  removeLevelFinishedAnimations();
 
   let gameContainer = document.querySelector("#game");
   let stroke = document.querySelector("#stroke");
