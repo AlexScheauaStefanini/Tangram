@@ -41,8 +41,6 @@ function dragElements() {
 		piece.ondblclick = rotatePieces;
 
 		let options = {
-			constrain: true,
-			relativeTo: document.querySelector(".wrapper"),
 			onMouseDown: () => {
 				piece.style.zIndex = 2
 			},

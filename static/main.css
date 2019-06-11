@@ -224,9 +224,9 @@ button.btn:hover{
 }
 
 #game {
-    position: relative;
     min-width: 350px;
     min-height: 310px;
+    margin-bottom: 50px;
 }
 
 #game #level{
@@ -310,6 +310,7 @@ button.btn:hover{
 #drag-container {
     min-width: 350px;
     min-height: 310px;
+    margin-bottom: 50px;
 }
 
 #game, #stroke {
