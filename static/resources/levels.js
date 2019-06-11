@@ -1137,7 +1137,54 @@ let levels = {
             "transform": "rotate(45deg)"
           }
         ]
-      }
+      },
+      "33": {
+        "big-t": [
+          {
+            "top": 237,
+            "left": 475,
+            "transform": "rotate(0deg)"
+          },
+          {
+            "top": 237,
+            "left": 8,
+            "transform": "rotate(0deg)"
+          }
+        ],
+        "med-t": [
+          {
+            "top": 239,
+            "left": 315,
+            "transform": "rotate(0deg)"
+          }
+        ],
+        "para": [
+          {
+            "top": 234,
+            "left": 314,
+            "transform": "rotate(90deg)"
+          }
+        ],
+        "small-t": [
+          {
+            "top": 385,
+            "left": 316,
+            "transform": "rotate(180deg)"
+          },
+          {
+            "top": 197,
+            "left": 281,
+            "transform": "rotate(270deg)"
+          }
+        ],
+        "square": [
+          {
+            "top": 4,
+            "left": 315,
+            "transform": "rotate(0deg)"
+          }
+        ]
+      },
 }
 
 let origins = [

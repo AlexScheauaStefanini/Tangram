@@ -37,7 +37,7 @@ function validateMove(elmnt) {
 				} else {
 					pieceValidationSet.splice(i, 1);
 				}
-
+				
 				elmnt.style.zIndex = 0;
 				elmnt.firstElementChild.classList.add("in-place"); // schimb culoarea si scot eventurile de pe element
 			}

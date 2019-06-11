@@ -328,7 +328,7 @@ button.btn:hover{
 }
 
 .leaderboard-container {
-    background: url(./resources/leaderboard-background.png) repeat fixed;
+    background: url(./resources/images/leaderboard-background.png) repeat fixed;
 }
 
 .leaderboard-title {
@@ -346,6 +346,14 @@ button.btn:hover{
     background-color: #CAD400;
     border-radius: 50%;
     color: #fff;
+}
+
+.title-star-button {
+    transition-duration: .4s;
+}
+
+.title-star-button:hover {
+    background-color: #518DB2;
 }
 
 .leaderboard {
@@ -402,6 +410,7 @@ button.btn:hover{
     margin: 30px 0 10px;
 }
 
+/* GAME FINISHED MODAL */
 
 .d-flex {
     display: flex;

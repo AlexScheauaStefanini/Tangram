@@ -67,7 +67,7 @@ function gameInitialize(game) {
 		document.querySelector('.btn-level').innerText = "Puzzle " + currentLevel; //(player.gamesFinished.length); currentLevel
 	}
 
-	new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
+	// new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
 	document.querySelector('#game').innerHTML = `<img src="./resources/levels/level${currentLevel}.svg" id="level" onload="SVGInject(this)"></img>`
 
 	resetOffsets();
