@@ -21,10 +21,10 @@ async function createPlayer() {
 
 	try {
 		await Api.userRequest("get", nicknameInput.value)
-		.then(response => {
-			player = new Player(nicknameInput.value, response.gamesRemaining || [], response.gamesFinished);
-			playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
-		})
+			.then(response => {
+				player = new Player(nicknameInput.value, response.gamesRemaining || [], response.gamesFinished);
+				playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
+			})
 	}
 	catch (err) {
 		player = new Player(nicknameInput.value);
@@ -56,8 +56,8 @@ function gameInitialize(game) {
 		currentLevel = player.gamesRemaining[LevelSelector.nextLevel()];
 		levelTimer = new timer();
 		levelTimer.startTimer();
-	} 
-																																									//to uncomment
+	}
+	//to uncomment
 	player.setCurrentLevelValidationSet(levels[currentLevel]); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
 
 	document.querySelector('.btn-name').innerText = player.name;
@@ -67,8 +67,13 @@ function gameInitialize(game) {
 		document.querySelector('.btn-level').innerText = "Puzzle " + currentLevel; //(player.gamesFinished.length); currentLevel
 	}
 
-	// new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
-	document.querySelector('#game').innerHTML = `<img src="./resources/levels/level${currentLevel}.svg" id="level" onload="SVGInject(this)"></img>`
+	try{
+		new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
+		document.querySelector('#game').innerHTML = `<img src="./resources/levels/level${currentLevel}.svg" id="level" onload="SVGInject(this)"></img>`
+	}
+	catch(err){
+		console.log("ResizeObserver not available");
+	}
 
 	resetOffsets();
 	newLevelAnimations();
