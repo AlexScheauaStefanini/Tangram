@@ -24,6 +24,9 @@ async function createPlayer() {
 				player = new Player(nicknameInput.value, response.gamesRemaining || [], response.gamesFinished);
 				playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
 			})
+			if(player.gamesRemaining.length === 0){
+				gameInitialize("new");
+			}
 	}
 	catch (err) {
 		player = new Player(nicknameInput.value);

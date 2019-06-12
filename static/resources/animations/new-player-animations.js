@@ -1,15 +1,18 @@
 function nameAddedAnimation() {
-  if (document.querySelector("#player-nickname-input").value.length < 3 || document.querySelector("#player-nickname-input").value.length > 10) {
-    document.querySelector("#player-nickname-input").classList.add('empty-input');
+  let tester = new RegExp('[^a-zA-Z0-9]','g'); //name validation
+  let playerInput = document.querySelector("#player-nickname-input");
+
+  if (tester.test(playerInput.value) || playerInput.value.length < 3 || playerInput.value.length > 10) {
+    playerInput.classList.add('empty-input');
     return;
   } else {
-    document.querySelector("#player-nickname-input").classList.remove('empty-input');
+    playerInput.classList.remove('empty-input');
     createPlayer();
   }
 
   document.querySelector(".player-input-container").classList.add('player-input-container-name-added');
   document.querySelector(".player-input-info").classList.add("player-input-info-remove");
-  document.querySelector("#player-nickname-input").style.pointerEvents = "none";
+  playerInput.style.pointerEvents = "none";
   document.querySelectorAll(".game-tutorial").forEach(text => {
     text.classList.add("game-tutorial-show");
   })
