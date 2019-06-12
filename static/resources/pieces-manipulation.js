@@ -45,7 +45,7 @@ function dragElements() {
 				piece.style.zIndex = 2
 			},
 			onMouseUp: () => {
-				closeDrag(piece);  																													//to uncomment
+				closeDrag(piece);																													//to uncomment
 				// positionGenerator();	
 			},
 
