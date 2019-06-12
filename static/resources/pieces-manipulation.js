@@ -37,10 +37,10 @@ function dragElements() {
 	let pieces = document.querySelectorAll(".piece");
 	pieces.forEach((piece) => {
 		
-		if(/Mobi/.test(navigator.userAgent)){
+		if(/Mobi/.test(navigator.userAgent)){ //doubletap for touchscreen
 			piece.ondblclick = rotatePieces;
 		} else {
-			piece.oncontextmenu = rotatePieces;
+			piece.oncontextmenu = rotatePieces; //right click for mouse
 		}
 
 		let options = {

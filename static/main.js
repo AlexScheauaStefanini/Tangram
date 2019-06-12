@@ -9,7 +9,6 @@ window.onresize = () => {
 	resetOffsets();
 }
 
-
 let currentLevel = 0;
 let player = '';
 

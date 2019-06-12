@@ -1,4 +1,4 @@
-const Database = require('./src/database');
+const Database = require('./utils/database');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -9,7 +9,7 @@ app.use(cors());
 //get user from Firebase
 app.get('/api/users/:name', async (req, res) => {
   let user = await Database.getUser(req.params.name);
-  if(user){
+  if (user) {
     res.status(200).send(JSON.stringify(user));
   } else {
     res.status(404).send("");
@@ -17,9 +17,9 @@ app.get('/api/users/:name', async (req, res) => {
 })
 
 // post or put user on Firebase
-app.put('/api/users/:name', async (req,res) => {
+app.put('/api/users/:name', async (req, res) => {
   let response = await Database.setUser(req.params.name, req.body);
-  if(response === "error"){
+  if (response === "error") {
     res.status(500).send("User was not saved");
   } else {
     res.status(200).send(JSON.stringify(req.body));
@@ -29,7 +29,7 @@ app.put('/api/users/:name', async (req,res) => {
 // get user level time from leaderboard
 app.get('/api/leaderboard/:level/:name', async (req, res) => {
   let response = await Database.getLevelTime(req.params.level, req.params.name);
-  if(response){
+  if (response) {
     res.status(200).send(JSON.stringify(response));
   } else {
     res.status(404).send("There is no time set")
@@ -37,15 +37,33 @@ app.get('/api/leaderboard/:level/:name', async (req, res) => {
 })
 
 // get first 10 players ordered by completition time.
-app.get('/api/leaderboard/:level', async (req,res) => {
+app.get('/api/leaderboard/:level', async (req, res) => {
   let leaderboard = await Database.getLevelLeaderboard(req.params.level);
   res.status(200).send(JSON.stringify(leaderboard));
 })
+//get all leaderboards per level
+app.get('/api/leaderboard', async (req, res) => {
+  let leaderboards = await Database.getAllLevelBoards();
+  res.status(200).send(JSON.stringify(leaderboards));
+})
 
+
+// MARK FOR REMOVING //
 // post or put user level timescore to leaderboard
-app.put('/api/leaderboard/:level', async (req,res) => {
+app.put('/api/leaderboard/:level', async (req, res) => {
   let response = await Database.setLevelTime(req.params.level, req.body);
-  if(response === "error"){
+  if (response === "error") {
+    res.status(500).send("Time was not saved");
+  } else {
+    res.status(200).send(JSON.stringify(response));
+  }
+})
+// MARK FOR REMOVING //
+
+app.put('/api/avgLeaderboard/:name', async (req, res) => {
+  let response = await Database.setAverageTime(req.body);
+
+  if (response === "error") {
     res.status(500).send("Time was not saved");
   } else {
     res.status(200).send(JSON.stringify(response));
