@@ -17,8 +17,7 @@ function nameAddedAnimation() {
     text.classList.add("game-tutorial-show");
   })
   
-  document.querySelector(".btn-play").classList.add('removeTrue')
-  
+  document.querySelector(".btn-play").classList.add('removeTrue');
 }
 
 function removeCharacterInterface(game) {

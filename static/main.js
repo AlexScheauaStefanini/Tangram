@@ -22,11 +22,14 @@ async function createPlayer() {
 		await Api.userRequest("get", nicknameInput.value)
 			.then(response => {
 				player = new Player(nicknameInput.value, response.gamesRemaining || [], response.gamesFinished);
-				playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
+				if(player.gamesRemaining.length === 0){
+					playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
+				} else {
+					playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
+				}
+
 			})
-			if(player.gamesRemaining.length === 0){
-				gameInitialize("new");
-			}
+			
 	}
 	catch (err) {
 		player = new Player(nicknameInput.value);
@@ -65,7 +68,7 @@ function gameInitialize(game) {
 	if (player.gamesFinished.length === 0) {
 		document.querySelector('.btn-level').innerText = "Tutorial";
 	} else {
-		document.querySelector('.btn-level').innerText = "Puzzle " + currentLevel; //(player.gamesFinished.length); currentLevel
+		document.querySelector('.btn-level').innerText = "Puzzle " + (player.gamesFinished.length);
 	}
 
 	try{
@@ -76,10 +79,12 @@ function gameInitialize(game) {
 	}
 
 	document.querySelector('#game').innerHTML = `<img src="./resources/levels/level${currentLevel}.svg" id="level" onload="SVGInject(this)"></img>`
+	
 
 	resetOffsets();
 	newLevelAnimations();
-	getLeaderboard()
+	getLeaderboard();
+	
 }
 
 function resetOffsets() {

@@ -203,7 +203,7 @@ button.btn:hover{
 
 .btn-play i{
     color: #fff;
-    zoom: 3;
+    font-size: 35px;
     transform: translateX(1px);
     opacity: 1;
     animation: input-group-loading 1s;
@@ -247,19 +247,10 @@ button.btn:hover{
     animation: svg-container-appearing;
 }
 
-#drag-container .piece svg {
-    zoom: 1.5;
-}
-
 .piece svg * {
     pointer-events: fill;
     cursor: grab;
     fill-opacity: 0;
-    /* todelete */
-    /* fill-opacity: 1;
-    fill: url(#piece-gradient);
-    stroke: url(#piece-gradient); */
-    /* todelete */
     stroke: #CAD400;
     stroke-width: 1px;
     box-sizing: content-box;

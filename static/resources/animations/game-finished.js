@@ -10,7 +10,7 @@ function createModalGameFinished(){
         <p>Your average time per puzzle is: </p>
         <p> ${player.getAverageTime()} s.</p>
         <p>Think you can do better?</p>
-        <button class="btn" onclick="removeModal();gameInitialize('new')">New game</button>
+        <button class="btn" onclick="removeModal();removeLevelFinishedAnimations();gameInitialize('new')">New game</button>
 
     </div>
   `;
