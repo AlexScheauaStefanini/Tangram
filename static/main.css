@@ -274,7 +274,7 @@ button.btn:hover{
 }
 
 .stroke-container {
-    margin: 0 100px;
+    margin: 0 35px;
 }
 
 .timer-nextlevel {
@@ -496,9 +496,5 @@ button.btn:hover{
 @media only screen and (max-width: 1500px){
     .game-container{
         flex-wrap: nowrap !important;
-    }
-
-    .stroke-container {
-        margin: 0 35px;
     }
 }
