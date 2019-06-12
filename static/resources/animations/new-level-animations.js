@@ -40,6 +40,6 @@ function newLevelAnimations(){
       piece.firstElementChild.classList.remove('svg-container-appearing');
     })
     timer.classList.remove('timer-appearing');
-    
+    resetPieces();
   },{once:true})
 }

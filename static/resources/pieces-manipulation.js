@@ -37,8 +37,11 @@ function dragElements() {
 	let pieces = document.querySelectorAll(".piece");
 	pieces.forEach((piece) => {
 		
-		piece.oncontextmenu = rotatePieces;
-		piece.ondblclick = rotatePieces;
+		if(/Mobi/.test(navigator.userAgent)){
+			piece.ondblclick = rotatePieces;
+		} else {
+			piece.oncontextmenu = rotatePieces;
+		}
 
 		let options = {
 			onMouseDown: () => {

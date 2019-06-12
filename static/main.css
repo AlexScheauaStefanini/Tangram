@@ -229,7 +229,7 @@ button.btn:hover{
     margin-bottom: 50px;
 }
 
-#game #level{
+#level{
     zoom: 2;
     user-select: none;
 }
@@ -359,10 +359,12 @@ button.btn:hover{
 
 .leaderboard {
     margin: 50px 0;
+    width: 40%;
 }
 
 .leaderboard li {
     margin: 20px 0;
+    width: 100%;
 }
 
 .leaderboard li i {
@@ -374,22 +376,22 @@ button.btn:hover{
 }
 
 .leaderboard li .leaderboard-text {
-    width: 150px;
+    
     font-size: 1.4rem;
 }
 
 .leaderboard .first .leaderboard-text{
-    width: 180px;
+    
     font-size: 3.1rem;
 }
 
 .leaderboard .second .leaderboard-text{
-    width: 170px;
+    
     font-size: 2.5rem;
 }
 
 .leaderboard .third .leaderboard-text{
-    width: 150px;
+    
     font-size: 2rem;
 }
 
@@ -427,6 +429,10 @@ button.btn:hover{
 
 .justify-content-around {
     justify-content: space-around;
+}
+
+.justify-content-between {
+    justify-content: space-between;
 }
 
 .align-items-center {
@@ -479,5 +485,20 @@ button.btn:hover{
 
     #video-background {
         max-height: 100%;
+    }
+
+    .leaderboard {
+        width: 90%;
+    }
+
+}
+
+@media only screen and (max-width: 1500px){
+    .game-container{
+        flex-wrap: nowrap !important;
+    }
+
+    .stroke-container {
+        margin: 0 35px;
     }
 }

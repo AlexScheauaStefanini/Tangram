@@ -13,7 +13,7 @@ function drawLeaderboard(array) {
   for (let i = 0; i < array.length; i++) {
     if (array[i][0] === player.name) {
       leaderboardComponent += `
-        <li class="leaderboard-entry d-flex">
+        <li class="leaderboard-entry d-flex justify-content-between">
           <i class="fas fa-star d-flex align-self-center"></i>
           <p class="leaderboard-text text-start">${i + 1}</p>
           <p class="leaderboard-text text-center">${array[i][0]}</p>
@@ -22,7 +22,7 @@ function drawLeaderboard(array) {
       `
     } else {
       leaderboardComponent += `
-        <li class="leaderboard-entry d-flex">
+        <li class="leaderboard-entry d-flex justify-content-between">
           <p class="leaderboard-text text-start">${i + 1}</p>
           <p class="leaderboard-text text-center">${array[i][0]}</p>
           <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1])}</p>
