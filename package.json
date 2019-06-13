@@ -8,7 +8,9 @@
     "express": "^4.17.1",
     "firebase": "^6.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
