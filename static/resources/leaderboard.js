@@ -1,5 +1,5 @@
-function getLeaderboard() {
-  Api.leaderboardRequest('get', currentLevel)
+function getLevelLeaderboard(level) {
+  Api.leaderboardRequest('get', level)
     .then((response) => {
       drawLeaderboard(response);
     })
@@ -31,20 +31,20 @@ function drawLeaderboard(array) {
       `
     }
   }
-  
+
   leaderboard.innerHTML = leaderboardComponent;
   let listItems = document.querySelectorAll('.leaderboard .leaderboard-entry');
-  listItems[0] ? listItems[0].classList.add('first'):'';
-  listItems[1] ? listItems[1].classList.add('second'):'';
-  listItems[2] ? listItems[2].classList.add('third'):'';
+  listItems[0] ? listItems[0].classList.add('first') : '';
+  listItems[1] ? listItems[1].classList.add('second') : '';
+  listItems[2] ? listItems[2].classList.add('third') : '';
 }
 
-function leaderboardSecondsToMinutes(time){
-  let minutes = parseInt(time/60);
+function leaderboardSecondsToMinutes(time) {
+  let minutes = parseInt(time / 60);
   let seconds = time % 60;
 
-  if(seconds < 10){
-    return minutes + ':0' + seconds; 
+  if (seconds < 10) {
+    return minutes + ':0' + seconds;
   } else {
     return minutes + ':' + seconds;
   }

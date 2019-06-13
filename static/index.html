@@ -22,7 +22,7 @@
 	<title>Tangram</title>
 </head>
 
-<body>
+<body onload="getPlayerNameFromLocal()">
 
 	<section class="wrapper">
 		<video autoplay muted loop id="video-background">
@@ -57,9 +57,9 @@
 		</div>
 		<!-- NavBar -->
 		<div class="nav d-flex justify-content-center">
-			<p class="btn btn-name">Alex Scheaua</p>
+			<p class="btn btn-name"></p>
 			<p class="btn btn-level"></p>
-			<button class="btn" onclick="resetPieces();">Reset</button>
+			<button class="btn reset-button" onclick="resetPieces();">Reset</button>
 			<!--  -->
 		</div>
 
@@ -146,8 +146,5 @@
 
 </html>
 
-<!-- Leaderboard - fiecare nivel - nr nivele --DONE--> 
-<!-- login cu PIN`code --CANCELED-->
-<!-- stroke centrat restul inline --DONE-->
-<!-- FD: creearea de leaderboarduri din server bazanduse pe player.finishedGames -- -->
+<!-- FD: creearea de leaderboarduri din server bazate pe player.finishedGames -- -->
 <!-- FD: pagina de avgLeaderboard si levelLeaderboard -- -->

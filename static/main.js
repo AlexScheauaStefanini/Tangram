@@ -5,12 +5,14 @@ let gameOffsetY = document.querySelector("#game").offsetTop;
 let dragOffsetX = document.querySelector("#drag-container").offsetLeft;
 let dragOffsetY = document.querySelector("#drag-container").offsetTop;
 
-window.onresize = () => {
-	resetOffsets();
-}
-
 let currentLevel = 0;
 let player = '';
+
+function getPlayerNameFromLocal(){
+	if(localStorage.name){
+		document.querySelector('#player-nickname-input').value = localStorage.name;
+	}
+}
 
 async function createPlayer() {
 	let playBtn = document.querySelector(".btn-play");
@@ -27,9 +29,7 @@ async function createPlayer() {
 				} else {
 					playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
 				}
-
 			})
-			
 	}
 	catch (err) {
 		player = new Player(nicknameInput.value);
@@ -83,7 +83,7 @@ function gameInitialize(game) {
 
 	resetOffsets();
 	newLevelAnimations();
-	getLeaderboard();
+	getLevelLeaderboard(currentLevel);
 	
 }
 
@@ -95,8 +95,6 @@ function resetOffsets() {
 	gameOffsetY = document.querySelector("#game").offsetTop;
 }
 
-
-
-
-
-
+window.onresize = () => {
+	resetOffsets();
+}

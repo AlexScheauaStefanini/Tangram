@@ -1,6 +1,6 @@
-function createModalGameFinished(){
+function createModalGameFinished() {
   let modalContainer = document.createElement("div");
-  modalContainer.setAttribute('id','game-finished-modal');
+  modalContainer.setAttribute('id', 'game-finished-modal');
   modalContainer.classList.add('d-flex', 'justify-content-center', 'align-items-center');
   modalContainer.innerHTML = `
   
@@ -17,6 +17,6 @@ function createModalGameFinished(){
   document.querySelector("body").appendChild(modalContainer);
 }
 
-function removeModal(){
+function removeModal() {
   document.querySelector('#game-finished-modal').remove();
 }

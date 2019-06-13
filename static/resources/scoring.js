@@ -8,11 +8,11 @@ class Player {
 
     this.name = name;
     this.currentLevelValidationSet = {};
-    this.gamesRemaining = gamesRemaining || [...this.defaults.remaining]; 
+    this.gamesRemaining = gamesRemaining || [...this.defaults.remaining];
     this.gamesFinished = gamesFinished || [...this.defaults.finished];
   }
-  
-  setCurrentLevelValidationSet(object){
+
+  setCurrentLevelValidationSet(object) {
     this.currentLevelValidationSet = JSON.parse(JSON.stringify(object));
   }
 
@@ -32,11 +32,11 @@ class Player {
     this.gamesFinished = [...this.defaults.finished];
   }
 
-  getAverageTime(){
+  getAverageTime() {
     let avgTime = 0;
-    this.gamesFinished.forEach((levelFinished)=>{
-      avgTime += levelFinished.timeScore;
-    })
+    for (let i = 0; i < this.gamesFinished; i++) {
+      avgTime += this.gamesFinished[i].timeScore
+    }
     return parseFloat(avgTime / this.gamesFinished.length).toFixed(2);
   }
 }
@@ -55,7 +55,7 @@ class LevelSelector {
       if (player.gamesFinished.length !== 0 && currentLevel === player.gamesFinished[i].level || currentLevel === 0) {
         this.currentLevel = Math.floor(Math.random() * player.gamesRemaining.length);
         return this.currentLevel;
-      }   
+      }
     }
     // showAlert('You have to complete the current level to go to the next one', 'danger');
   }
@@ -72,7 +72,7 @@ function timer() {
   function drawTimer(seconds) {
     let minutes = parseInt(seconds / 60);
     let secondsTimer = seconds % 60
-    if(secondsTimer < 10){
+    if (secondsTimer < 10) {
       timerContainer.innerText = `${minutes}:0${secondsTimer}` //pun 0 in fata secundelor daca am mai putin de 10 secunde
     } else {
       timerContainer.innerText = `${minutes}:${secondsTimer}`

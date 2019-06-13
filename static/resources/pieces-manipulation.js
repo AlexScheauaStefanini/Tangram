@@ -35,29 +35,28 @@ function closeDrag(elmnt) {
 
 function dragElements() {
 	let pieces = document.querySelectorAll(".piece");
-	pieces.forEach((piece) => {
-		
-		if(/Mobi/.test(navigator.userAgent)){ //doubletap for touchscreen
-			piece.ondblclick = rotatePieces;
+	for (let i = 0; i < pieces.length; i++) {
+		if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
+			pieces[i].ondblclick = rotatePieces;
 		} else {
-			piece.oncontextmenu = rotatePieces; //right click for mouse
+			pieces[i].oncontextmenu = rotatePieces; //right click for mouse
 		}
 
 		let options = {
 			onMouseDown: () => {
-				piece.style.zIndex = 2
+				pieces[i].style.zIndex = 2
 			},
 			onMouseUp: () => {
-				closeDrag(piece);																													//to uncomment
+				closeDrag(pieces[i]);																													//to uncomment
 				// positionGenerator();	
 			},
 
-			onTouchMove: () => { piece.style.zIndex = 2 },
+			onTouchMove: () => { pieces[i].style.zIndex = 2 },
 			onTouchStop: () => {
-				closeDrag(piece);
+				closeDrag(pieces[i]);
 			}
 		};
 
-		window.displacejs(piece, options);
-	});
+		window.displacejs(pieces[i], options);
+	}
 }
