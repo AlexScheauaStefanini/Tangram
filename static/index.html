@@ -37,7 +37,8 @@
 			<div class="player-input-container d-flex flex-column align-items-center">
 				<p class="player-input-info">TIP: You should select an unique nickname and remember it since your game
 					progresion and leaderboard will be saved with your nickname!</p>
-				<p class="player-input-info">Your nickname should be minimum 3 and max 10 characters and space is not allowed</p>
+				<p class="player-input-info">Your nickname should be minimum 3 and max 10 characters and space is not allowed
+				</p>
 				<input id="player-nickname-input" type="text" placeholder="Please Enter your nickname" value="" autofocus>
 			</div>
 
@@ -49,8 +50,7 @@
 			</div>
 
 			<div class="d-flex justify-content-center">
-				<button type="button" class="btn-play" onclick="nameAddedAnimation();">
-					<!-- createPlayer();dragElements(); -->
+				<button type="button" class="btn-play" onclick="createPlayer();">
 					<i class="fas fa-play"></i>
 				</button>
 			</div>
@@ -111,7 +111,9 @@
 			</div>
 		</div>
 	</section>
+	<!-- JOC -->
 
+	<!-- LEADERBOARD -->
 	<section class="leaderboard-section">
 		<div class="leaderboard-container d-flex flex-column align-items-center">
 			<p class="leaderboard-title"><i class="fas fa-star title-star"></i>LEADERBOARD</p>
@@ -120,7 +122,7 @@
 			<ul class="leaderboard player d-flex flex-column align-items-center"></ul>
 		</div>
 	</section>
-
+	<!-- LEADERBOARD -->
 	<svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
 		<linearGradient id="piece-gradient" x2="1" y2="1">
 			<stop offset="0%" stop-color="#518DB2" />
@@ -148,3 +150,4 @@
 
 <!-- FD: creearea de leaderboarduri din server bazate pe player.finishedGames -- -->
 <!-- FD: pagina de avgLeaderboard si levelLeaderboard -- -->
+<!-- FD: mutarea validarii levelelor pe server -->

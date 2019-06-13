@@ -6,13 +6,26 @@ app.use(express.json());
 app.use(express.static('static'));
 app.use(cors());
 
+
+//
+app.get('/api/:userInput', (req,res) => {
+  let regEx = new RegExp('[^a-zA-Z0-9]', 'g'); //name validation
+  let username = req.params.userInput.trim();
+  
+  if(regEx.test(username)){
+    res.status(200).send(false);
+  } else {
+    res.status(200).send(JSON.stringify(username));
+  }
+})
+
 //get user from Firebase
 app.get('/api/users/:name', async (req, res) => {
   let user = await Database.getUser(req.params.name);
   if (user) {
     res.status(200).send(JSON.stringify(user));
   } else {
-    res.status(404).send("");
+    res.status(200).send(false);
   }
 })
 

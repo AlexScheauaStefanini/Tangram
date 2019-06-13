@@ -1,8 +1,9 @@
 function resetPieces() {
   let resetPiecesCss = document.styleSheets[4]; //reset-pieces-animations.css / lista in ordinea incarcarii in index
   let pieces = document.querySelectorAll(".piece");
-  let stroke = document.querySelector('#stroke');
   let resetButton = document.querySelector('.reset-button')
+  
+  Origins.originsRecalculation();
 
   resetButton.setAttribute('onclick',''); //scot functia de resetPieces de pe buton atata timp cat animatia este in desfasurare
   for (let i = 0; i < pieces.length; i++) {
@@ -14,9 +15,9 @@ function resetPieces() {
         transform:${pieces[i].style.transform};
       }
       100%{
-        top: ${origins[i].top + dragOffsetY}px; 
-        left:${(origins[i].left + stroke.offsetLeft + 100)}px; 
-        transform:${origins[i].transform};
+        top: ${Origins.pieceOriginalCoords[i].top + dragOffsetY}px; 
+        left:${Origins.pieceOriginalCoords[i].left}px; 
+        transform:${Origins.pieceOriginalCoords[i].transform};
       }
     }`, resetPiecesCss.cssRules.length)
 
@@ -26,9 +27,9 @@ function resetPieces() {
 
       resetButton.setAttribute('onclick','resetPieces();');//pun functia de resetPieces de pe buton atata timp cat animatia este in desfasurare
       // piesele raman pe locul unde ajung dupa animatie
-      pieces[i].style.top = (origins[i].top + dragOffsetY) + "px";
-      pieces[i].style.left = (origins[i].left + stroke.offsetLeft + 100) + "px";
-      pieces[i].style.transform = origins[i].transform;
+      pieces[i].style.top = (Origins.pieceOriginalCoords[i].top + dragOffsetY) + "px";
+      pieces[i].style.left = Origins.pieceOriginalCoords[i].left  + "px";
+      pieces[i].style.transform = Origins.pieceOriginalCoords[i].transform;
 
       pieces[i].classList.remove(`reset-${id}`);
       pieces[i].firstElementChild.classList.remove("in-place"); //deblochez draganddrop de pe elemente dupa ce animatia se termina

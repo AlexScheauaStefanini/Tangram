@@ -16,11 +16,11 @@ function newLevelAnimations() {
 
   for (let i = 0; i < pieces.length; i++) {
     //asez piesele in forma initiala
-    pieces[i].style.top = (origins[i].top + dragOffsetY) + "px";
-    pieces[i].style.left = (origins[i].left + stroke.offsetLeft + 100) + "px";
+    pieces[i].style.top = (Origins.pieceOriginalCoords[i].top + dragOffsetY) + "px";
+    pieces[i].style.left = (Origins.pieceOriginalCoords[i].left + stroke.offsetLeft + 100) + "px";
 
 
-    pieces[i].style.transform = origins[i].transform;
+    pieces[i].style.transform = Origins.pieceOriginalCoords[i].transform;
     pieces[i].firstElementChild.classList.remove("in-place");
 
     if (pieces[i].style.transform === "rotate(90deg)") {

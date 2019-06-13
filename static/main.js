@@ -8,40 +8,62 @@ let dragOffsetY = document.querySelector("#drag-container").offsetTop;
 let currentLevel = 0;
 let player = '';
 
-function getPlayerNameFromLocal(){
-	if(localStorage.name){
+function getPlayerNameFromLocal() { //verific daca am nume salvat in localstorage dintr-o sesiune trecuta
+	if (localStorage.name) {
 		document.querySelector('#player-nickname-input').value = localStorage.name;
 	}
 }
 
+document.addEventListener('keypress', function (e) { //listener de enter Key pentru butonul de play
+	if (e.key === "Enter" && document.querySelector(".btn-play")) {
+		document.querySelector(".btn-play").click();
+	}
+})
+
 async function createPlayer() {
 	let playBtn = document.querySelector(".btn-play");
-	let nicknameInput = document.querySelector("#player-nickname-input");
+	let playerInput = document.querySelector("#player-nickname-input");
+	let apiUsername = '';
 
-	playBtn.setAttribute("onclick", ''); //scot functia nameAddedAnimation() de pe buton pentru a nu rula functia createPLayer de mai multe ori
+	await fetch(`./api/${playerInput.value}`) //trimit player input la server pentru validare
+		.then(response => response.json())
+		.catch(err => playerInput.classList.add('empty-input'))
+		.then(response => apiUsername = response);
 
-	try {
-		await Api.userRequest("get", nicknameInput.value)
-			.then(response => {
-				player = new Player(nicknameInput.value, response.gamesRemaining || [], response.gamesFinished);
-				if(player.gamesRemaining.length === 0){
+	if (!apiUsername) {
+		return playerInput.classList.add('empty-input');
+	}
+
+	playerInput.classList.remove('empty-input');
+	localStorage.setItem("name", apiUsername);
+	nameAddedAnimation();
+
+	playBtn.setAttribute("onclick", ''); //scot functia createPlayer() de pe buton pentru a nu rula functia createPLayer de mai multe ori
+
+	//incerc sa creez user dupa datele din baza de date. daca nu pot creez player nou
+	await Api.userRequest("get", apiUsername)
+		.then(response => {
+			if (response) {
+				player = new Player(apiUsername, response.gamesRemaining || [], response.gamesFinished);
+				if (player.gamesRemaining.length === 0) {
 					playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
 				} else {
 					playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
 				}
-			})
-	}
-	catch (err) {
-		player = new Player(nicknameInput.value);
-		playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
-	}
+			} else {
+				console.log('New Player');
+				
+				player = new Player(apiUsername);
+				playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
+			}
+		})
 }
 
 
 let levelTimer = '';
 function gameInitialize(game) {
 	if (levelTimer) {
-		levelTimer.stopTimer(); //opresc cronometrul existent
+		levelTimer.stopTimer(); //opresc cronometrul existent daca exista
 	}
 
 	// if(typeof game === "number"){
@@ -71,15 +93,14 @@ function gameInitialize(game) {
 		document.querySelector('.btn-level').innerText = "Puzzle " + (player.gamesFinished.length);
 	}
 
-	try{
-		new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));	
+	try {
+		new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
 	}
-	catch(err){
+	catch (err) {
 		console.log("ResizeObserver not available");
 	}
 
 	document.querySelector('#game').innerHTML = `<img src="./resources/levels/level${currentLevel}.svg" id="level" onload="SVGInject(this)"></img>`
-	
 
 	resetOffsets();
 	newLevelAnimations();
@@ -97,4 +118,5 @@ function resetOffsets() {
 
 window.onresize = () => {
 	resetOffsets();
+	resetPieces();
 }

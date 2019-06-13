@@ -1,16 +1,7 @@
 function nameAddedAnimation() {
-  let tester = new RegExp('[^a-zA-Z0-9]', 'g'); //name validation
+  
   let playerInput = document.querySelector("#player-nickname-input");
   let gameTutorial = document.querySelectorAll(".game-tutorial");
-
-  if (tester.test(playerInput.value) || playerInput.value.length < 3 || playerInput.value.length > 10) {
-    playerInput.classList.add('empty-input');
-    return;
-  } else {
-    playerInput.classList.remove('empty-input');
-    localStorage.setItem("name", document.querySelector("#player-nickname-input").value);
-    createPlayer();
-  }
 
   document.querySelector(".player-input-container").classList.add('player-input-container-name-added');
   document.querySelector(".player-input-info").classList.add("player-input-info-remove");

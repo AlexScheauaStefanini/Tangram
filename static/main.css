@@ -463,10 +463,11 @@ button.btn:hover{
 
 
 /* schimb directia div`ului de game; */
-@media only screen and (max-width: 875px){
+@media only screen and (max-width: 1365px){
     .game-container {
         flex-direction: column;
         align-items: center;
+        justify-content: center;
     }
 
     .stroke-container {
@@ -487,7 +488,7 @@ button.btn:hover{
 
 }
 
-@media only screen and (max-width: 1500px){
+@media only screen and (max-width: 1550px){
     .game-container{
         flex-wrap: nowrap !important;
     }
