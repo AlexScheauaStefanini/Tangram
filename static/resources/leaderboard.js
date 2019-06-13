@@ -3,7 +3,6 @@ function getLeaderboard() {
     .then((response) => {
       drawLeaderboard(response);
     })
-
 }
 
 function drawLeaderboard(array) {
@@ -13,11 +12,13 @@ function drawLeaderboard(array) {
   for (let i = 0; i < array.length; i++) {
     if (array[i][0] === player.name) {
       leaderboardComponent += `
-        <li class="leaderboard-entry d-flex justify-content-between">
+        <li class="leaderboard-entry d-flex">
           <i class="fas fa-star d-flex align-self-center"></i>
-          <p class="leaderboard-text text-start">${i + 1}</p>
-          <p class="leaderboard-text text-center">${array[i][0]}</p>
-          <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1])}</p>
+          <div class="w-100 d-flex justify-content-between">
+            <p class="leaderboard-text text-start">${i + 1}</p>
+            <p class="leaderboard-text text-center">${array[i][0]}</p>
+            <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1])}</p>
+          </div>
         </li>
       `
     } else {
@@ -30,6 +31,7 @@ function drawLeaderboard(array) {
       `
     }
   }
+  
   leaderboard.innerHTML = leaderboardComponent;
   let listItems = document.querySelectorAll('.leaderboard .leaderboard-entry');
   listItems[0] ? listItems[0].classList.add('first'):'';

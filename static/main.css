@@ -230,7 +230,6 @@ button.btn:hover{
 }
 
 #level{
-    zoom: 2;
     user-select: none;
 }
 
@@ -456,6 +455,10 @@ button.btn:hover{
 
 .text-end {
     text-align: right
+}
+
+.w-100 {
+    width: 100%;
 }
 
 
