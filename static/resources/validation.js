@@ -51,7 +51,8 @@ function validateGame() {
 	let gameWon = Object.keys(player.currentLevelValidationSet).length === 0;
 	setTimeout(() => {
 		if (gameWon) {
-			let currentLevelTime = Player.levelComplete(currentLevel);
+			DragElements.stopDrag();
+			let currentLevelTime = player.levelComplete(currentLevel);
 			let bestLevelTime = 0;
 			let levelPosition = 0;
 

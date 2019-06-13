@@ -16,11 +16,11 @@ class Player {
     this.currentLevelValidationSet = JSON.parse(JSON.stringify(object));
   }
 
-  static levelComplete(currentLevel) {
-    let indexOfCurrentLevel = player.gamesRemaining.indexOf(currentLevel);
+  levelComplete(currentLevel) {
+    let indexOfCurrentLevel = this.gamesRemaining.indexOf(currentLevel);
     let currentLevelTime = levelTimer.stopTimer();
-    player.gamesRemaining.splice(indexOfCurrentLevel, 1);
-    player.gamesFinished.push({
+    this.gamesRemaining.splice(indexOfCurrentLevel, 1);
+    this.gamesFinished.push({
       level: currentLevel,
       timeScore: currentLevelTime
     })
@@ -41,25 +41,21 @@ class Player {
   }
 }
 
-class LevelSelector {
-
-  static newGame() {
-    // showAlert(`Hello ${player.name}. New game started`, 'info');
+let LevelSelector = {
+  newGame: function () {
     player.resetGame();
     this.currentLevel = Math.floor(Math.random() * player.gamesRemaining.length);
     return this.currentLevel;
-  }
+  },
 
-  static nextLevel() {
+  nextLevel: function () {
     for (let i = 0; i < player.gamesFinished.length; i++) {
       if (player.gamesFinished.length !== 0 && currentLevel === player.gamesFinished[i].level || currentLevel === 0) {
         this.currentLevel = Math.floor(Math.random() * player.gamesRemaining.length);
         return this.currentLevel;
       }
     }
-    // showAlert('You have to complete the current level to go to the next one', 'danger');
-  }
-
+  },
 }
 
 function timer() {

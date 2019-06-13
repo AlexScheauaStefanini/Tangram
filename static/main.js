@@ -84,7 +84,7 @@ function gameInitialize(game) {
 	resetOffsets();
 	newLevelAnimations();
 	getLevelLeaderboard(currentLevel);
-	
+	DragElements.startDrag();
 }
 
 function resetOffsets() {

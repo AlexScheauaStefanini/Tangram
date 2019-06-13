@@ -32,7 +32,6 @@ function removeCharacterInterface(game) {
       document.querySelector(".nav").classList.add("navbar-appear"); //salvez username`ul in localStorage. va fi autocompletat cand redeschid pagina
 
       gameInitialize(game)
-      dragElements(); //initializez functia de drag and drop pentru piese
     }, { once: true })
   }
 }

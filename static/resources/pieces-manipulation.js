@@ -1,5 +1,4 @@
-// // Functie rotate.
-
+// Functie rotate.
 let rotatePieces = (e) => {
 	e.preventDefault(); // prevent rightclick menu
 
@@ -33,30 +32,40 @@ function closeDrag(elmnt) {
 	validateGame();
 }
 
-function dragElements() {
-	let pieces = document.querySelectorAll(".piece");
-	for (let i = 0; i < pieces.length; i++) {
-		if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
-			pieces[i].ondblclick = rotatePieces;
-		} else {
-			pieces[i].oncontextmenu = rotatePieces; //right click for mouse
-		}
-
-		let options = {
-			onMouseDown: () => {
-				pieces[i].style.zIndex = 2
-			},
-			onMouseUp: () => {
-				closeDrag(pieces[i]);																													//to uncomment
-				// positionGenerator();	
-			},
-
-			onTouchMove: () => { pieces[i].style.zIndex = 2 },
-			onTouchStop: () => {
-				closeDrag(pieces[i]);
+let DragElements = {
+		pieces: document.querySelectorAll(".piece"),
+		manipulatePieces: [],
+	
+		startDrag:  function(){
+		for (let i = 0; i < this.pieces.length; i++) {
+			if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
+				this.pieces[i].ondblclick = rotatePieces;
+			} else {
+				this.pieces[i].oncontextmenu = rotatePieces; //right click for mouse
 			}
-		};
-
-		window.displacejs(pieces[i], options);
+	
+			let options = {
+				onMouseDown: () => {
+					this.pieces[i].style.zIndex = 2
+				},
+				onMouseUp: () => {
+					closeDrag(this.pieces[i]);																													//to uncomment
+					// positionGenerator();	
+				},
+	
+				onTouchMove: () => { this.pieces[i].style.zIndex = 2 },
+				onTouchStop: () => {
+					closeDrag(this.pieces[i]);
+				}
+			};
+			
+			this.manipulatePieces.push(window.displacejs(this.pieces[i], options));
+		}
+	},
+	
+	 stopDrag: function(){
+		for (let i = 0; i < this.manipulatePieces.length; i++) {
+			this.manipulatePieces[i].destroy();
+		}
 	}
 }
