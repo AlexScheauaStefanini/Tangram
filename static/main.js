@@ -116,7 +116,12 @@ function resetOffsets() {
 	gameOffsetY = document.querySelector("#game").offsetTop;
 }
 
-window.onresize = () => {
+let windowHeight = window.innerHeight;
+window.onresize = () => { //resetez piesele si offsetul doar daca resizeul este pe width, si nu pe height
+	if(this.innerHeight != windowHeight){ 
+		windowHeight = this.innerHeight;
+		return;
+	}
 	resetOffsets();
 	resetPieces();
 }
