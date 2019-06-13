@@ -657,7 +657,7 @@ let Origins = { //functie care genereaza originile pieselor in functie de dimens
     { "top": 202, "left": 103, "transform": "rotate(0deg)" }
   ],
 
-  stroke: document.querySelector('#stroke'),
+  stroke: document.querySelector('#stroke'), //in functie de offsetul stroke se pozitioneaza piesele cand screenwidth este mai mare de 1365px
 
   pieceOriginalCoords: [
     { "top": -13, "left": 0, "transform": "rotate(0deg)" },
