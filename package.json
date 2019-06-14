@@ -1,6 +1,6 @@
 {
   "name": "tangram-node",
-  "version": "1.25.0",
+  "version": "1.25.3",
   "description": "Tangram Node",
   "main": "server.js",
   "dependencies": {
@@ -13,7 +13,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "serve": "nodemon server.js"
   },
   "author": "Alex Scheaua",
   "license": "ISC"

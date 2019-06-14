@@ -35,7 +35,6 @@ async function createPlayer() {
 	}
 
 	playerInput.classList.remove('empty-input');
-	localStorage.setItem("name", apiUsername);
 	nameAddedAnimation();
 
 	playBtn.setAttribute("onclick", ''); //scot functia createPlayer() de pe buton pentru a nu rula functia createPLayer de mai multe ori
@@ -57,8 +56,8 @@ async function createPlayer() {
 				playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
 			}
 		})
+		localStorage.setItem("name", apiUsername);
 }
-
 
 let levelTimer = '';
 function gameInitialize(game) {
@@ -78,6 +77,7 @@ function gameInitialize(game) {
 
 	} else if (!(player.gamesRemaining[LevelSelector.nextLevel()])) {
 		return; //daca incerc sa trec la nivelul urmator fara sa termin nivelul curent ies din functie
+
 	} else if (game === "next") {
 		currentLevel = player.gamesRemaining[LevelSelector.nextLevel()];
 		levelTimer = new timer();
@@ -85,6 +85,7 @@ function gameInitialize(game) {
 	}
 	//to uncomment
 	player.setCurrentLevelValidationSet(levels[currentLevel]); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
+	document.querySelector('.leaderboard.player').innerHTML = ''; // sterg ultimul rand din leaderboard
 
 	document.querySelector('.btn-name').innerText = player.name;
 	if (player.gamesFinished.length === 0) {

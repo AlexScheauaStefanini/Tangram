@@ -37,7 +37,11 @@ function newLevelAnimations() {
     document.querySelector("#game").classList.remove('game-appearing');
     document.querySelector("#stroke").classList.remove('stroke-apearing');
     for (let i = 0; i < pieces.length; i++) {
-      pieces[i].firstElementChild.classList.remove('svg-container-appearing');
+      if (pieces[i].style.transform === "rotate(90deg)") {
+        pieces[i].firstElementChild.classList.remove('svg-container-appearing-rotated');
+      } else {
+        pieces[i].firstElementChild.classList.remove('svg-container-appearing');
+      }
     }
     timer.classList.remove('timer-appearing');
     resetPieces();

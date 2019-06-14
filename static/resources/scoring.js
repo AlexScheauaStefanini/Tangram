@@ -34,7 +34,7 @@ class Player {
 
   getAverageTime() {
     let avgTime = 0;
-    for (let i = 0; i < this.gamesFinished; i++) {
+    for (let i = 0; i < this.gamesFinished.length; i++) {
       avgTime += this.gamesFinished[i].timeScore
     }
     return parseFloat(avgTime / this.gamesFinished.length).toFixed(2);

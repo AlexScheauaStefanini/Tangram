@@ -27,6 +27,12 @@ let rotatePieces = (e) => {
 	}
 }
 
+if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
+	document.querySelector('.game-container').ondblclick = rotatePieces;
+} else {
+	document.querySelector('.game-container').oncontextmenu = rotatePieces; //right click for mouse
+}
+
 function closeDrag(elmnt) {
 	validateMove(elmnt);
 	validateGame();
@@ -38,14 +44,9 @@ let DragElements = {
 	
 		startDrag:  function(){
 		for (let i = 0; i < this.pieces.length; i++) {
-			if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
-				this.pieces[i].ondblclick = rotatePieces;
-			} else {
-				this.pieces[i].oncontextmenu = rotatePieces; //right click for mouse
-			}
-	
+				
 			let options = {
-				onMouseDown: () => {
+				onMouseDown: () => {	
 					this.pieces[i].style.zIndex = 2
 				},
 				onMouseUp: () => {
