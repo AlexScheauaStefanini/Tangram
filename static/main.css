@@ -231,12 +231,14 @@ button.btn:hover{
 
 #level{
     user-select: none;
+    filter: drop-shadow( 0px 0px 5px #111)
 }
 
 #level *{
     fill-opacity: 0;
     fill: url(#piece-gradient);
     stroke: url(#piece-gradient);
+    
 }
 
 .piece {

@@ -28,7 +28,24 @@ let rotatePieces = (e) => {
 }
 
 if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
-	document.querySelector('.game-container').ondblclick = rotatePieces;
+	let pieces = document.querySelectorAll('.piece')
+	// document.querySelector('.game-container').ondblclick = rotatePieces;
+	for (var i = 0; i < pieces.length; i++) {
+		let count = 0;
+		pieces[i].addEventListener('click', function() {
+			count++;
+			if (count === 1) {
+					singleClickTimer = setTimeout(function() {	
+							count = 0;
+					}, 300);
+			} else if (count === 2) {
+					clearTimeout(singleClickTimer);
+					count = 0;
+					rotatePieces();
+			}
+	}, false);
+		
+	}
 } else {
 	document.querySelector('.game-container').oncontextmenu = rotatePieces; //right click for mouse
 }

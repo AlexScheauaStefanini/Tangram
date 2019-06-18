@@ -314,21 +314,49 @@ let levels = {
   },
   "16": {
     "big-t": [
-      { "top": 262, "left": 4, "transform": "rotate(45deg)" },
-      { "top": 163, "left": 90, "transform": "rotate(90deg)" }
+      {
+        "top": 275,
+        "left": -14,
+        "transform": "rotate(45deg)"
+      },
+      {
+        "top": 177,
+        "left": 71,
+        "transform": "rotate(90deg)"
+      }
     ],
     "med-t": [
-      { "top": 6, "left": 427, "transform": "rotate(0deg)" }
+      {
+        "top": 2,
+        "left": 409,
+        "transform": "rotate(0deg)"
+      }
     ],
     "para": [
-      { "top": 223, "left": 258, "transform": "rotate(135deg)" }
+      {
+        "top": 221,
+        "left": 239,
+        "transform": "rotate(135deg)"
+      }
     ],
     "small-t": [
-      { "top": 122, "left": 62, "transform": "rotate(45deg)" },
-      { "top": 125, "left": 126, "transform": "rotate(90deg)" }
+      {
+        "top": 134,
+        "left": 43,
+        "transform": "rotate(45deg)"
+      },
+      {
+        "top": 137,
+        "left": 108,
+        "transform": "rotate(90deg)"
+      }
     ],
     "square": [
-      { "top": 13, "left": 166, "transform": "rotate(0deg)" }
+      {
+        "top": 26,
+        "left": 148,
+        "transform": "rotate(0deg)"
+      }
     ]
   },
   "17": {

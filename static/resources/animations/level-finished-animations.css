@@ -5,15 +5,18 @@
 .game-level-finished-fill #level *{
   animation: game-level-finished-fill 0.5s;
   fill-opacity: 1;
+  stroke: url(#piece-gradient);
 }
 
 @keyframes game-level-finished-fill {
   0%{
     fill-opacity: 0;
+    stroke: #bbb;
   }
 
   100%{
     fill-opacity: 1;
+    stroke: url(#piece-gradient);
   }
 }
 

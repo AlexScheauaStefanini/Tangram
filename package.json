@@ -1,6 +1,6 @@
 {
   "name": "tangram-node",
-  "version": "1.25.3",
+  "version": "1.26.2",
   "description": "Tangram Node",
   "main": "server.js",
   "dependencies": {
