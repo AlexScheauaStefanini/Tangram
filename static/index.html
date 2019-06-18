@@ -25,9 +25,11 @@
 <body onload="getPlayerNameFromLocal()">
 
 	<section class="wrapper">
+		<!-- VIDEOBACKGROUND -->
 		<video autoplay muted loop id="video-background">
 			<source src="resources/video/game-background.mp4" type="video/mp4">
 		</video>
+		<!-- VIDEOBACKGROUND -->
 		<div class="title-container d-flex justify-content-center align-items-center">
 			<span class="title logo">TAN</span><span class="title">GRAM</span>
 			<a href="#leaderboard" title="Leaderboard"><i class="fas fa-star title-star-button"></i></a>
@@ -42,6 +44,7 @@
 				</p>
 				<input id="player-nickname-input" type="text" placeholder="Please Enter your nickname" value="" autofocus>
 			</div>
+			<!-- input pentru numele playerului -->
 
 			<div class="d-flex flex-column align-items-center">
 				<p class="game-tutorial">Complete the puzzle by moving and rotating the seven outlined shapes.</p>
@@ -61,9 +64,9 @@
 			<p class="btn btn-name"></p>
 			<p class="btn btn-level"></p>
 			<button class="btn reset-button" onclick="resetPieces();">Reset</button>
-			<!--  -->
+			
 		</div>
-
+		<!-- NavBar -->
 
 		<div class="timer-nextlevel d-flex justify-content-center">
 			<div class="timer-container d-flex justify-content-center align-items-center">
@@ -124,6 +127,7 @@
 		</div>
 	</section>
 	<!-- LEADERBOARD -->
+
 	<svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
 		<linearGradient id="piece-gradient" x2="1" y2="1">
 			<stop offset="0%" stop-color="#518DB2" />
@@ -148,7 +152,3 @@
 </body>
 
 </html>
-
-<!-- FD: creearea de leaderboarduri din server bazate pe player.finishedGames -- -->
-<!-- FD: pagina de avgLeaderboard si levelLeaderboard -- -->
-<!-- FD: mutarea validarii levelelor pe server -->
