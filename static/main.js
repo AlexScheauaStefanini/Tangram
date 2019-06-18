@@ -98,6 +98,7 @@ function gameInitialize(game) {
 		new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
 	}
 	catch (err) {
+		document.querySelector('#drag-container').style.width = 600+'px';
 		console.log("ResizeObserver not available");
 	}
 
@@ -117,12 +118,13 @@ function resetOffsets() {
 	gameOffsetY = document.querySelector("#game").offsetTop;
 }
 
-let windowHeight = window.innerHeight;
-window.onresize = () => { //resetez piesele si offsetul doar daca resizeul este pe width, si nu pe height
-	if(this.innerHeight != windowHeight){ 
-		windowHeight = this.innerHeight;
+let windowWidth = window.innerWidth;
+window.onresize = () => { 	
+	if(this.innerWidth === windowWidth){ //resetez piesele si offsetul doar daca resizeul este pe width, si nu pe height
 		return;
 	}
+	windowWidth = this.innerWidth;
+
 	resetOffsets();
 	resetPieces();
 }

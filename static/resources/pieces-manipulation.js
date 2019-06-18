@@ -33,7 +33,7 @@ if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
 	document.querySelector('.game-container').oncontextmenu = rotatePieces; //right click for mouse
 }
 
-function closeDrag(elmnt) {
+function endDrag(elmnt) {
 	validateMove(elmnt);
 	validateGame();
 }
@@ -50,13 +50,12 @@ let DragElements = {
 					this.pieces[i].style.zIndex = 2
 				},
 				onMouseUp: () => {
-					closeDrag(this.pieces[i]);																													//to uncomment
-					// positionGenerator();	
+					endDrag(this.pieces[i]);																													//to uncomment
 				},
 	
 				onTouchMove: () => { this.pieces[i].style.zIndex = 2 },
 				onTouchStop: () => {
-					closeDrag(this.pieces[i]);
+					endDrag(this.pieces[i]);
 				}
 			};
 			

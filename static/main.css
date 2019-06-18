@@ -243,7 +243,6 @@ button.btn:hover{
     position: absolute;
     pointer-events: none;
     opacity: 0;
-    animation: svg-container-appearing;
 }
 
 .piece svg * {

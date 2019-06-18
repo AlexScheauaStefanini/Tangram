@@ -1,0 +1,16 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="304.46" height="272.24" viewBox="0 0 304.46 272.24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>level59</title>
+  <g>
+    <polygon class="cls-1" points="38.89 84.46 38.89 194.46 171.67 194.46 226.68 249.46 281.68 249.45 226.67 194.46 226.68 116.67 71.11 116.68 38.89 84.46"/>
+    <rect class="cls-1" x="413.2899" y="125.2488" width="54.9952" height="55.0023" transform="translate(-154.1007 320.3972) rotate(-45.0074)"/>
+    <polygon class="cls-1" points="265.57 0 265.56 77.78 226.68 38.89 265.57 0"/>
+    <polygon class="cls-1" points="0 233.35 38.89 194.46 38.89 272.24 0 233.35"/>
+  </g>
+</svg>

@@ -24,9 +24,9 @@ function newLevelAnimations() {
     pieces[i].firstElementChild.classList.remove("in-place");
 
     if (pieces[i].style.transform === "rotate(90deg)") {
-      pieces[i].firstElementChild.classList.add('svg-container-appearing-rotated');
+      pieces[i].classList.add('svg-container-appearing-rotated');
     } else {
-      pieces[i].firstElementChild.classList.add('svg-container-appearing');
+      pieces[i].classList.add('svg-container-appearing');
     }
     pieces[i].style.opacity = 1;
   }
@@ -38,9 +38,9 @@ function newLevelAnimations() {
     document.querySelector("#stroke").classList.remove('stroke-apearing');
     for (let i = 0; i < pieces.length; i++) {
       if (pieces[i].style.transform === "rotate(90deg)") {
-        pieces[i].firstElementChild.classList.remove('svg-container-appearing-rotated');
+        pieces[i].classList.remove('svg-container-appearing-rotated');
       } else {
-        pieces[i].firstElementChild.classList.remove('svg-container-appearing');
+        pieces[i].classList.remove('svg-container-appearing');
       }
     }
     timer.classList.remove('timer-appearing');

@@ -32,11 +32,11 @@
 }
 @keyframes svg-container-appearing-rotated{
   0%{
-    transform: translateY(-400px);
+    transform: translateX(400px) rotate(90deg);
     opacity: 0;
   }
   100%{
-    transform: translateY(0px);
+    transform: translateX(0px) rotate(90deg);
     opacity: 1;
   }
 }

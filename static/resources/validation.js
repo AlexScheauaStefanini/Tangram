@@ -1,4 +1,5 @@
 function validateMove(elmnt) {
+	
 	let boundaries = 25;
 
 	let elmntId = '';
