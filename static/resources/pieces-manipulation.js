@@ -41,7 +41,7 @@ if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
 			} else if (count === 2) {
 					clearTimeout(singleClickTimer);
 					count = 0;
-					rotatePieces();
+					rotatePieces;
 			}
 	}, false);
 		
