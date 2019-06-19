@@ -18,11 +18,11 @@
 }
 @keyframes svg-container-appearing{
   0%{
-    transform: translateX(400px) rotate(0deg);
+    transform: translateX(400px);
     opacity: 0;
   }
   100%{
-    transform: translateX(0px) rotate(0deg);
+    transform: translateX(0px);
     opacity: 1;
   }
 }
