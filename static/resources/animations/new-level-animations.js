@@ -1,9 +1,10 @@
 function newLevelAnimations() {
-
   let gameContainer = document.querySelector("#game");
   let stroke = document.querySelector("#stroke");
   let pieces = document.querySelectorAll(".piece");
   let timer = document.querySelector(".timer-container");
+
+  Origins.originsRecalculation();
 
   gameContainer.classList.add('game-appearing');
   gameContainer.style.opacity = 1;
@@ -17,10 +18,9 @@ function newLevelAnimations() {
   for (let i = 0; i < pieces.length; i++) {
     //asez piesele in forma initiala
     pieces[i].style.top = (Origins.pieceOriginalCoords[i].top + dragOffsetY) + "px";
-    pieces[i].style.left = (Origins.pieceOriginalCoords[i].left + stroke.offsetLeft + 100) + "px";
-
-
+    pieces[i].style.left = Origins.pieceOriginalCoords[i].left + "px";
     pieces[i].style.transform = Origins.pieceOriginalCoords[i].transform;
+
     pieces[i].firstElementChild.classList.remove("in-place");
 
     if (pieces[i].style.transform === "rotate(90deg)") {
@@ -31,9 +31,8 @@ function newLevelAnimations() {
     pieces[i].style.opacity = 1;
   }
 
-
   document.querySelector("#game").addEventListener('animationend', () => {
-    resetOffsets();
+
     document.querySelector("#game").classList.remove('game-appearing');
     document.querySelector("#stroke").classList.remove('stroke-apearing');
     for (let i = 0; i < pieces.length; i++) {
@@ -44,6 +43,6 @@ function newLevelAnimations() {
       }
     }
     timer.classList.remove('timer-appearing');
-    resetPieces();
+
   }, { once: true })
 }

@@ -28,7 +28,7 @@ function resetPieces() {
       resetButton.setAttribute('onclick','resetPieces();');//pun functia de resetPieces de pe buton atata timp cat animatia este in desfasurare
       // piesele raman pe locul unde ajung dupa animatie
       pieces[i].style.top = (Origins.pieceOriginalCoords[i].top + dragOffsetY) + "px";
-      pieces[i].style.left = Origins.pieceOriginalCoords[i].left  + "px";
+      pieces[i].style.left = Origins.pieceOriginalCoords[i].left + "px";
       pieces[i].style.transform = Origins.pieceOriginalCoords[i].transform;
 
       pieces[i].classList.remove(`reset-${id}`);
