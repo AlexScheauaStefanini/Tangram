@@ -1,9 +1,7 @@
 //https://vectr.com/ascheaua/bFSFoU14Y
+let dragOffsetY = document.querySelector("#drag-container").offsetTop;
 let gameOffsetX = document.querySelector("#game").offsetLeft;
 let gameOffsetY = document.querySelector("#game").offsetTop;
-
-let dragOffsetX = document.querySelector("#drag-container").offsetLeft;
-let dragOffsetY = document.querySelector("#drag-container").offsetTop;
 
 let currentLevel = 0;
 let player = '';
@@ -111,9 +109,7 @@ function gameInitialize(game) {
 }
 
 function resetOffsets() {
-	dragOffsetX = document.querySelector("#drag-container").offsetLeft;
 	dragOffsetY = document.querySelector("#drag-container").offsetTop;
-
 	gameOffsetX = document.querySelector("#game").offsetLeft;
 	gameOffsetY = document.querySelector("#game").offsetTop;
 }

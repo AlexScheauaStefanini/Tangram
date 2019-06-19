@@ -1345,7 +1345,7 @@ let Origins = { //functie care genereaza originile pieselor in functie de dimens
       }
     } else {
       for (let i = 0; i < this.referenceCoordinates.length; i++) {
-        this.pieceOriginalCoords[i].left = this.referenceCoordinates[i].left + this.stroke.offsetLeft + 70;
+        this.pieceOriginalCoords[i].left = this.referenceCoordinates[i].left + (window.innerWidth / 2) + 80;
       }
     }
   }

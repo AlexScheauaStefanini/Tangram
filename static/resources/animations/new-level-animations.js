@@ -1,9 +1,10 @@
 function newLevelAnimations() {
-
   let gameContainer = document.querySelector("#game");
   let stroke = document.querySelector("#stroke");
   let pieces = document.querySelectorAll(".piece");
   let timer = document.querySelector(".timer-container");
+
+  Origins.originsRecalculation();
 
   gameContainer.classList.add('game-appearing');
   gameContainer.style.opacity = 1;
@@ -17,7 +18,7 @@ function newLevelAnimations() {
   for (let i = 0; i < pieces.length; i++) {
     //asez piesele in forma initiala
     pieces[i].style.top = (Origins.pieceOriginalCoords[i].top + dragOffsetY) + "px";
-    pieces[i].style.left = (Origins.pieceOriginalCoords[i].left + stroke.offsetLeft + 100) + "px";
+    pieces[i].style.left = Origins.pieceOriginalCoords[i].left + "px";
 
 
     pieces[i].style.transform = Origins.pieceOriginalCoords[i].transform;
