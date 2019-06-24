@@ -1,13 +1,27 @@
 function getLevelLeaderboard(level) {
   Api.leaderboardRequest('get', level)
-    .then((response) => {
-      drawLeaderboard(response);
+    .then(response => {
+      drawLeaderboard(response,level);
     })
 }
 
-function drawLeaderboard(array) {
+function getAverageLeaderboard(){
+  Api.avgLeaderboardRequest("get")
+  .then(response => {
+    drawLeaderboard(response);
+  })
+}
+
+function drawLeaderboard(array,level) {
   let leaderboard = document.querySelector('.leaderboard');
+  let leaderboardTitle = document.querySelector('#leaderboard-title-text')
   let leaderboardComponent = '';
+
+  if(level){
+    leaderboardTitle.innerText = `LEVEL ${level} LEADERBOARD`;
+  } else {
+    leaderboardTitle.innerText = `AVERAGE TIMES LEADERBOARD`;
+  }
 
   for (let i = 0; i < array.length; i++) {
     if (array[i][0] === player.name) {

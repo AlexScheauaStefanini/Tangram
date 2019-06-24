@@ -14,7 +14,7 @@ class Api {
     if (!player) {
       player = '';
     }
-
+    
     return await fetch(`./api/leaderboard/${level}/${player}`, {
       method: method,
       headers: {
@@ -41,7 +41,7 @@ class Api {
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: data ? JSON.stringify(data) : null
     })
       .then(response => response.json())
   }

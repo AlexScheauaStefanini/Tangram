@@ -8,7 +8,7 @@ app.use(cors());
 
 
 //
-app.get('/api/:userInput', (req,res) => {
+app.get('/api/validate/:userInput', (req,res) => {
   let regEx = new RegExp('[^a-zA-Z0-9]', 'g'); //name validation
   let username = req.params.userInput.trim();
   
@@ -52,6 +52,7 @@ app.get('/api/leaderboard/:level/:name', async (req, res) => {
 // get first 10 players ordered by completition time.
 app.get('/api/leaderboard/:level', async (req, res) => {
   let leaderboard = await Database.getLevelLeaderboard(req.params.level);
+  
   res.status(200).send(JSON.stringify(leaderboard));
 })
 //get all leaderboards per level
@@ -60,26 +61,41 @@ app.get('/api/leaderboard', async (req, res) => {
   res.status(200).send(JSON.stringify(leaderboards));
 })
 
-
-// MARK FOR REMOVING //
 // post or put user level timescore to leaderboard
 app.put('/api/leaderboard/:level', async (req, res) => {
   let response = await Database.setLevelTime(req.params.level, req.body);
+  
   if (response === "error") {
     res.status(500).send("Time was not saved");
   } else {
     res.status(200).send(JSON.stringify(response));
   }
 })
-// MARK FOR REMOVING //
 
+//post or put player avg time
 app.put('/api/avgLeaderboard/:name', async (req, res) => {
   let response = await Database.setAverageTime(req.body);
-
+  
   if (response === "error") {
     res.status(500).send("Time was not saved");
   } else {
     res.status(200).send(JSON.stringify(response));
+  }
+})
+
+//get general avg leaderboard
+app.get('/api/avgLeaderboard', async (req, res)=>{
+  let response = await Database.getAvgLeaderboard();
+  let playerArray = [];
+
+  response.forEach(user => {
+    playerArray.push([user.val().name,user.val().avgTime]); 
+  });
+  
+  if (response === "error") {
+    res.status(404).send("Could not get data");
+  } else {
+    res.status(200).send(JSON.stringify(playerArray));
   }
 })
 

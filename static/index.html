@@ -22,7 +22,7 @@
 	<title>Tangram</title>
 </head>
 
-<body onload="getPlayerNameFromLocal()">
+<body onload="getPlayerNameFromLocal();getAverageLeaderboard()">
 
 	<section class="wrapper">
 		<!-- VIDEOBACKGROUND -->
@@ -120,7 +120,7 @@
 	<!-- LEADERBOARD -->
 	<section class="leaderboard-section">
 		<div class="leaderboard-container d-flex flex-column align-items-center">
-			<p class="leaderboard-title"><i class="fas fa-star title-star"></i>LEADERBOARD</p>
+			<p class="leaderboard-title"><i class="fas fa-star title-star"></i><span id='leaderboard-title-text'>LEADERBOARD</span></p>
 			<ul id="leaderboard" class="leaderboard d-flex flex-column align-items-center"></ul>
 			<hr class="horizontal-line">
 			<ul class="leaderboard player d-flex flex-column align-items-center"></ul>

@@ -23,7 +23,7 @@ async function createPlayer() {
 	let playerInput = document.querySelector("#player-nickname-input");
 	let apiUsername = '';
 
-	await fetch(`./api/${playerInput.value}`) //trimit player input la server pentru validare
+	await fetch(`./api/validate/${playerInput.value}`) //trimit player input la server pentru validare
 		.then(response => response.json())
 		.catch(err => playerInput.classList.add('empty-input'))
 		.then(response => apiUsername = response);

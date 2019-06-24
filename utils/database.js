@@ -31,7 +31,6 @@ class Database { //class for Firebase interaction
       .then(snapshot => snapshot.val());
   }
 
-  // MARK FOR REMOVING //
   //set user level time to database leaderboard
   static async setLevelTime(level, player) {
     let currentDbTime = await this.getLevelTime(level, player.name);
@@ -45,12 +44,12 @@ class Database { //class for Firebase interaction
     }
     return await getPlayerPosition(level, player.name);
   }
-  // MARK FOR REMOVING //
 
   //set user avg time
   static async setAverageTime(obj) {
     let object = {
-      avgTime: obj.avgTime
+      avgTime: parseFloat(obj.avgTime),
+      name: obj.name
     }
 
     await db.ref(`avgLeaderboard/${obj.name}`).set(object, (error) => {
@@ -61,6 +60,20 @@ class Database { //class for Firebase interaction
 
     return obj;
   }
+
+  //get avgLeaderboard 
+  static async getAvgLeaderboard() {
+    let avgLeaderboard = []
+    await db.ref(`avgLeaderboard`).orderByChild('avgTime').once('value')
+      .then(snapshot => {
+        snapshot.forEach(user => {
+          avgLeaderboard.push(user);
+        })
+      })
+      
+    return avgLeaderboard;
+  }
+
   //get the first 10 players ordered by their level finishing time
   static async getLevelLeaderboard(level) {
     let lvlLeaderboard = [];
