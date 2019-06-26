@@ -34,10 +34,10 @@ class Player {
 
   getAverageTime() {
     let avgTime = 0;
-    for (let i = 0; i < this.gamesFinished.length; i++) {
+    for (let i = 1; i < this.gamesFinished.length; i++) { // i = 1 pentru a nu include si tutorialul in calcul
       avgTime += this.gamesFinished[i].timeScore
     }
-    return parseFloat(avgTime / this.gamesFinished.length).toFixed(2);
+    return parseFloat(avgTime / this.gamesFinished.length - 1).toFixed(2); // -1 pentru a nu include si tutorialul in calcul
   }
 }
 

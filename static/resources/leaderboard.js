@@ -58,8 +58,8 @@ function leaderboardSecondsToMinutes(time) {
   let seconds = time % 60;
 
   if (seconds < 10) {
-    return minutes + ':0' + seconds;
+    return minutes + ':0' + seconds.toFixed(2);
   } else {
-    return minutes + ':' + seconds;
+    return minutes + ':' + seconds.toFixed(2);
   }
 }

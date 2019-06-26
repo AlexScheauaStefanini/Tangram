@@ -48,8 +48,6 @@ async function createPlayer() {
 					playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
 				}
 			} else {
-				console.log('New Player');
-				
 				player = new Player(apiUsername);
 				playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
 			}

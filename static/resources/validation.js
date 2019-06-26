@@ -1,5 +1,5 @@
 function validateMove(elmnt) {
-	
+
 	let boundaries = 25;
 
 	let elmntId = '';
@@ -54,32 +54,34 @@ function validateGame() {
 		if (gameWon) {
 			DragElements.stopDrag();
 			let currentLevelTime = player.levelComplete(currentLevel);
-			let bestLevelTime = 0;
-			let levelPosition = 0;
 
-			let playerObject = {
-				"gamesRemaining": player.gamesRemaining,
-				"gamesFinished": player.gamesFinished
-			}
+			if (parseInt(currentLevel) !== 1) { //nu pun in baza de date primul nivel (tutorialul)
+				let bestLevelTime = 0;
+				let levelPosition = 0;
 
-			let levelObject = {
-				name: `${player.name}`,
-				[player.name]: currentLevelTime
-			}
+				let playerObject = {
+					"gamesRemaining": player.gamesRemaining,
+					"gamesFinished": player.gamesFinished
+				}
 
-			Api.userRequest("put", player.name, JSON.stringify(playerObject)); //adug datele player`ului in baza de date (nume, jocuri ramase si finalizate)
-			//request verfic daca timpul actual este mai bun decat timpul din baza de date (daca exista) si inlocuiesc/adaug
-			Api.leaderboardRequest("put", currentLevel, '', JSON.stringify(levelObject))
-				.then((response) => {
-					levelPosition = response;
+				let levelObject = {
+					name: `${player.name}`,
+					[player.name]: currentLevelTime
+				}
 
-					Api.leaderboardRequest("get", currentLevel, player.name)
-						.then((response) => {
-							bestLevelTime = response;
-						})
-						.then(() => {
-							if (levelPosition > 10) {
-								document.querySelector('.leaderboard.player').innerHTML = `
+				Api.userRequest("put", player.name, JSON.stringify(playerObject)); //adug datele player`ului in baza de date (nume, jocuri ramase si finalizate)
+				//request verfic daca timpul actual este mai bun decat timpul din baza de date (daca exista) si inlocuiesc/adaug
+				Api.leaderboardRequest("put", currentLevel, '', JSON.stringify(levelObject))
+					.then((response) => {
+						levelPosition = response;
+
+						Api.leaderboardRequest("get", currentLevel, player.name)
+							.then((response) => {
+								bestLevelTime = response;
+							})
+							.then(() => {
+								if (levelPosition > 10) {
+									document.querySelector('.leaderboard.player').innerHTML = `
 									<li class="leaderboard-entry d-flex">
 										<i class="fas fa-star d-flex align-self-center"></i>
 										<div class="w-100 d-flex justify-content-between">
@@ -89,15 +91,15 @@ function validateGame() {
 										</div>
 									</li>
 								`
-							} else {
-								getLevelLeaderboard(currentLevel);
-							}
-						});
-				})
-			//pun avg time-ul in baza de date
-			Api.avgLeaderboardRequest('put', player.name);
+								} else {
+									getLevelLeaderboard(currentLevel);
+								}
+							});
+					})
+				//pun avg time-ul in baza de date
+				Api.avgLeaderboardRequest('put', player.name);
+			}
 
-			// showAlert("Level completed!!! Click next game","success");
 			levelFinishedAnimations();
 			if (!player.gamesRemaining.length) {
 				createModalGameFinished();
