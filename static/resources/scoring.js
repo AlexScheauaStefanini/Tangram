@@ -2,7 +2,7 @@ class Player {
 
   constructor(name, gamesRemaining, gamesFinished) {
     this.defaults = {
-      remaining: Object.keys(levels),
+      remaining: this.levelKeys(),
       finished: []
     }
 
@@ -10,6 +10,14 @@ class Player {
     this.currentLevelValidationSet = {};
     this.gamesRemaining = gamesRemaining || [...this.defaults.remaining];
     this.gamesFinished = gamesFinished || [...this.defaults.finished];
+  }
+
+  async levelKeys(){
+    let keys = [];
+    await Api.getLevelKeysArr()
+    .then(data => keys = data);
+
+    return keys
   }
 
   setCurrentLevelValidationSet(object) {
@@ -30,14 +38,6 @@ class Player {
   resetGame() {
     this.gamesRemaining = [...this.defaults.remaining];
     this.gamesFinished = [...this.defaults.finished];
-  }
-
-  getAverageTime() {
-    let avgTime = 0;
-    for (let i = 1; i < this.gamesFinished.length; i++) { // i = 1 pentru a nu include si tutorialul in calcul
-      avgTime += this.gamesFinished[i].timeScore
-    }
-    return parseFloat(avgTime / this.gamesFinished.length - 1).toFixed(2); // -1 pentru a nu include si tutorialul in calcul
   }
 }
 

@@ -96,8 +96,6 @@ function validateGame() {
 								}
 							});
 					})
-				//pun avg time-ul in baza de date
-				Api.avgLeaderboardRequest('put', player.name);
 			}
 
 			levelFinishedAnimations();

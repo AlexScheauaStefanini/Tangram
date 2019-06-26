@@ -25,24 +25,18 @@ class Api {
       .then(response => response.json())
   }
 
-  static async avgLeaderboardRequest(method, playerName) {
-    let data = '';
-    if (playerName) {
-      data = {
-        name: player.name,
-        avgTime: player.getAverageTime()
-      };
-    } else {
-      playerName = '';
-    }
-
-    return await fetch(`./api/avgLeaderboard/${playerName}`, {
-      method: method,
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: data ? JSON.stringify(data) : null
-    })
+  static async avgLeaderboardRequest() {
+    return await fetch(`./api/avgLeaderboard/`)
       .then(response => response.json())
+  }
+
+  static async getLevelValidationSet(levelNo){
+    return await fetch(`./api/levelvalidationset/${levelNo}`)
+    .then(response => response.json())
+  }
+
+  static async getLevelKeysArr(){
+    return await fetch('./api/levelkeysarray')
+    .then(response => response.json())
   }
 }

@@ -41,5 +41,6 @@ function resetPieces() {
     })
   }
   resetOffsets(); //recalibrez coordonatele unde trebuie sa ajung piesele
-  player.setCurrentLevelValidationSet(levels[currentLevel]); //reinitializez obiectul cu coordonatele care vor vailda nivelul actual
+  Api.getLevelValidationSet(currentLevel)
+	.then(data => player.setCurrentLevelValidationSet(data)); //reinitializez obiectul cu coordonatele care vor vailda nivelul actual
 }

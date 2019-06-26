@@ -6,7 +6,7 @@ function getLevelLeaderboard(level) {
 }
 
 function getAverageLeaderboard(){
-  Api.avgLeaderboardRequest("get")
+  Api.avgLeaderboardRequest()
   .then(response => {
     drawLeaderboard(response);
   })
@@ -21,6 +21,7 @@ function drawLeaderboard(array,level) {
     leaderboardTitle.innerText = `LEVEL ${level} LEADERBOARD`;
   } else {
     leaderboardTitle.innerText = `AVERAGE TIMES LEADERBOARD`;
+    level = '';
   }
 
   for (let i = 0; i < array.length; i++) {
@@ -31,7 +32,7 @@ function drawLeaderboard(array,level) {
           <div class="w-100 d-flex justify-content-between">
             <p class="leaderboard-text text-start">${i + 1}</p>
             <p class="leaderboard-text text-center">${array[i][0]}</p>
-            <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1])}</p>
+            <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1],level)}</p>
           </div>
         </li>
       `
@@ -40,7 +41,7 @@ function drawLeaderboard(array,level) {
         <li class="leaderboard-entry d-flex justify-content-between">
           <p class="leaderboard-text text-start">${i + 1}</p>
           <p class="leaderboard-text text-center">${array[i][0]}</p>
-          <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1])}</p>
+          <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1],level)}</p>
         </li>
       `
     }
@@ -53,13 +54,21 @@ function drawLeaderboard(array,level) {
   listItems[2] ? listItems[2].classList.add('third') : '';
 }
 
-function leaderboardSecondsToMinutes(time) {
+function leaderboardSecondsToMinutes(time,level) {
   let minutes = parseInt(time / 60);
   let seconds = time % 60;
-
-  if (seconds < 10) {
-    return minutes + ':0' + seconds.toFixed(2);
+  if(!level){
+    if (seconds < 10) {
+      return minutes + ':0' + seconds.toFixed(2);
+    } else {
+      return minutes + ':' + seconds.toFixed(2);
+    }
   } else {
-    return minutes + ':' + seconds.toFixed(2);
+    if (seconds < 10) {
+      return minutes + ':0' + seconds;
+    } else {
+      return minutes + ':' + seconds;
+    }
   }
+  
 }

@@ -80,7 +80,9 @@ function gameInitialize(game) {
 		levelTimer.startTimer();
 	}
 	//to uncomment
-	player.setCurrentLevelValidationSet(levels[currentLevel]); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
+	Api.getLevelValidationSet(currentLevel)
+	.then(data => player.setCurrentLevelValidationSet(data)); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
+	 
 	document.querySelector('.leaderboard.player').innerHTML = ''; // sterg ultimul rand din leaderboard
 
 	document.querySelector('.btn-name').innerText = player.name;

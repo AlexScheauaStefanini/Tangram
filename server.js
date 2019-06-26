@@ -1,4 +1,5 @@
 const Database = require('./utils/database');
+const Data = require('./utils/dataManipulation');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -28,10 +29,31 @@ app.get('/api/users/:name', async (req, res) => {
     res.status(200).send(false);
   }
 })
+//get levelValidationSet
+app.get('/api/levelvalidationset/:levelNo', (req, res) => {
+  let levelValidationSet = Data.getLevelValidationSet(req.params.levelNo);
+  if (levelValidationSet) {
+    res.status(200).send(JSON.stringify(levelValidationSet))
+  } else {
+    res.status(404).send("Could not generate validation set");
+  }
+})
 
-// post or put user on Firebase
+app.get('/api/levelkeysarray', (req,res) => {
+  let levelKeys = Data.getLevelKeysArray();
+  if(levelKeys) {
+    res.status(200).send(JSON.stringify(levelKeys));
+  } else {
+    res.status(500).send('Could not get the levels')
+  }
+})
+
+// post or put user data and AvgTime on Firebase
 app.put('/api/users/:name', async (req, res) => {
   let response = await Database.setUser(req.params.name, req.body);
+
+  Database.setAverageTime(Data.setAvgTime(req.params.name, req.body.gamesFinished));
+
   if (response === "error") {
     res.status(500).send("User was not saved");
   } else {
@@ -72,25 +94,10 @@ app.put('/api/leaderboard/:level', async (req, res) => {
   }
 })
 
-//post or put player avg time
-app.put('/api/avgLeaderboard/:name', async (req, res) => {
-  let response = await Database.setAverageTime(req.body);
-
-  if (response === "error") {
-    res.status(500).send("Time was not saved");
-  } else {
-    res.status(200).send(JSON.stringify(response));
-  }
-})
-
-//get general avg leaderboard
+//get avg leaderboard
 app.get('/api/avgLeaderboard', async (req, res) => {
   let response = await Database.getAvgLeaderboard();
-  let playerArray = [];
-
-  response.forEach(user => {
-    playerArray.push([user.val().name, user.val().avgTime]);
-  });
+  let playerArray = Data.generateAvgTimeLeaderboard(response);
 
   if (response === "error") {
     res.status(404).send("Could not get data");
