@@ -1,8 +1,14 @@
+let defaultsRemainingKeys = []; 
+(() => { //get levels array for this.defaults.remaining
+  Api.getLevelKeysArr()
+   .then(data => defaultsRemainingKeys = data)
+})()
+
 class Player {
 
   constructor(name, gamesRemaining, gamesFinished) {
     this.defaults = {
-      remaining: this.levelKeys(),
+      remaining: defaultsRemainingKeys,
       finished: []
     }
 
@@ -10,14 +16,6 @@ class Player {
     this.currentLevelValidationSet = {};
     this.gamesRemaining = gamesRemaining || [...this.defaults.remaining];
     this.gamesFinished = gamesFinished || [...this.defaults.finished];
-  }
-
-  async levelKeys(){
-    let keys = [];
-    await Api.getLevelKeysArr()
-    .then(data => keys = data);
-
-    return keys
   }
 
   setCurrentLevelValidationSet(object) {

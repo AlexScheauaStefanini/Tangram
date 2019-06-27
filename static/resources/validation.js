@@ -50,7 +50,7 @@ function validateGame() {
 
 	//verific pozitia elementelor in lista
 	let gameWon = Object.keys(player.currentLevelValidationSet).length === 0;
-	setTimeout(() => {
+	setTimeout(async() => {
 		if (gameWon) {
 			DragElements.stopDrag();
 			let currentLevelTime = player.levelComplete(currentLevel);
@@ -69,9 +69,10 @@ function validateGame() {
 					[player.name]: currentLevelTime
 				}
 
-				Api.userRequest("put", player.name, JSON.stringify(playerObject)); //adug datele player`ului in baza de date (nume, jocuri ramase si finalizate)
-				//request verfic daca timpul actual este mai bun decat timpul din baza de date (daca exista) si inlocuiesc/adaug
-				Api.leaderboardRequest("put", currentLevel, '', JSON.stringify(levelObject))
+				await Api.userRequest("put", player.name, JSON.stringify(playerObject)) //adug datele player`ului in baza de date (nume, jocuri ramase si finalizate)
+					.then(data => GameFinished.setAvgTime(data[1].avgTime));
+
+				Api.leaderboardRequest("put", currentLevel, '', JSON.stringify(levelObject))//request verfic daca timpul actual este mai bun decat timpul din baza de date (daca exista) si inlocuiesc/adaug
 					.then((response) => {
 						levelPosition = response;
 
@@ -100,7 +101,7 @@ function validateGame() {
 
 			levelFinishedAnimations();
 			if (!player.gamesRemaining.length) {
-				createModalGameFinished();
+				GameFinished.createModal();
 			}
 		}
 	}, 60)

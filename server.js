@@ -52,12 +52,12 @@ app.get('/api/levelkeysarray', (req,res) => {
 app.put('/api/users/:name', async (req, res) => {
   let response = await Database.setUser(req.params.name, req.body);
 
-  Database.setAverageTime(Data.setAvgTime(req.params.name, req.body.gamesFinished));
+  let averageTime = await Database.setAverageTime(Data.setAvgTime(req.params.name, req.body.gamesFinished));
 
   if (response === "error") {
     res.status(500).send("User was not saved");
   } else {
-    res.status(200).send(JSON.stringify(req.body));
+    res.status(200).send(JSON.stringify([req.body, averageTime]));
   }
 })
 

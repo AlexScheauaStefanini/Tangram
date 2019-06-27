@@ -35,8 +35,8 @@ class Api {
     .then(response => response.json())
   }
 
-  static async getLevelKeysArr(){
-    return await fetch('./api/levelkeysarray')
+  static getLevelKeysArr(){
+    return fetch('./api/levelkeysarray')
     .then(response => response.json())
   }
 }

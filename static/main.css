@@ -237,7 +237,7 @@ button.btn:hover{
     fill-opacity: 0;
     fill: url(#piece-gradient);
     stroke: url(#piece-gradient);
-    
+    stroke-width: 2;
 }
 
 .piece {
