@@ -32,7 +32,7 @@
 		<!-- VIDEOBACKGROUND -->
 		<div class="title-container d-flex justify-content-center align-items-center">
 			<span class="title logo">TAN</span><span class="title">GRAM</span>
-			<a href="./resources/leaderboard-component" target="_blank" title="Leaderboard"><i class="fas fa-star title-star-button"></i></a>
+			<a href="#leaderboard" title="Leaderboard"><i class="fas fa-star title-star-button"></i></a>
 		</div>
 		<!-- input pentru numele playerului -->
 		<div class="removable-container d-flex align-items-center flex-column">
@@ -73,8 +73,10 @@
 				<p id="timer">Timer</p>
 			</div>
 			<button class="btn" id="next-level">Next Level</button>
+			<button class="btn skip-level" onclick="skipButton.handleClick()">Skip Level</button>
+			
 		</div>
-
+		<p id="devOnly"></p>
 		<!-- Joc -->
 		<div class="game-container d-flex justify-content-center flex-wrap">
 			<div id="game"></div>

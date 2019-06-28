@@ -6,6 +6,7 @@ function newLevelAnimations() {
 
   Origins.originsRecalculation();
 
+  skipButton.appear();
   gameContainer.classList.add('game-appearing');
   gameContainer.style.opacity = 1;
 
@@ -47,4 +48,35 @@ function newLevelAnimations() {
     timer.classList.remove('timer-appearing');
     resetPieces();
   }, { once: true })
+}
+
+let skipButton = {
+  skipBtn: document.querySelector(".skip-level"),
+  appear: () => {
+    if(currentLevel === '1'){
+      return;
+    };
+    skipButton.skipBtn.classList.remove('skip-button-disappear');
+    skipButton.skipBtn.classList.add('skip-button-appear');
+  },
+
+  disappear: () => {
+    skipButton.skipBtn.classList.remove('skip-button-appear');
+    skipButton.skipBtn.classList.add('skip-button-disappear');
+  },
+
+  handleClick: () => {
+    if (skipButton.skipBtn.classList.contains('resetTrue')) {
+      gameInitialize('next');
+      skipButton.skipBtn.classList.remove('resetTrue');
+      skipButton.skipBtn.innerText = 'Skip Level';
+    } else {
+      skipButton.skipBtn.innerText = 'Confirm';
+      skipButton.skipBtn.classList.add('resetTrue');
+      setTimeout(() => {
+        skipButton.skipBtn.classList.remove('resetTrue');
+        skipButton.skipBtn.innerText = 'Skip Level';
+      }, 2000);
+    }
+  }
 }

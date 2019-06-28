@@ -18,9 +18,9 @@ function validateMove(elmnt) {
 	for (let i = 0; i < pieceValidationSet.length; i++) {
 		//aliniez coordonatele pentru snap cu interfata (pentru resize)
 		let elementBoundariesY = pieceValidationSet[i].top + gameOffsetY;
-		let elementPositionY = parseFloat(elmnt.style.top);
+		let elementPositionY = parseInt(elmnt.style.top);
 		let elementBoundariesX = pieceValidationSet[i].left + gameOffsetX;
-		let elementPositionX = parseFloat(elmnt.style.left);
+		let elementPositionX = parseInt(elmnt.style.left);
 		// console.log(elementPositionY,elementPositionY);
 
 
@@ -30,9 +30,9 @@ function validateMove(elmnt) {
 				setTimeout(() => {
 					elmnt.style.top = elementBoundariesY + "px";  // aliniez pozitia elementului cu cea corecta pe axa Y (snap Y)
 					elmnt.style.left = elementBoundariesX + "px"; // aliniez pozitia elementului cu cea corecta pe axa X (snap X)
+					inPlacePositions[elmnt.firstElementChild.id] = { top: elementBoundariesY - gameOffsetY, left: elementBoundariesX - gameOffsetX }
 				}, 30)
-				// console.log("top:"+elmnt.style.top + " "+ elementBoundariesY);
-				// console.log("left:"+elmnt.style.left + " "+ elementBoundariesX);
+
 				if (pieceValidationSet.length === 1) {
 					delete player.currentLevelValidationSet[elmntId];
 				} else {
@@ -47,10 +47,8 @@ function validateMove(elmnt) {
 }
 
 function validateGame() {
-
-	//verific pozitia elementelor in lista
 	let gameWon = Object.keys(player.currentLevelValidationSet).length === 0;
-	setTimeout(async() => {
+	setTimeout(async () => {
 		if (gameWon) {
 			DragElements.stopDrag();
 			let currentLevelTime = player.levelComplete(currentLevel);
@@ -70,19 +68,18 @@ function validateGame() {
 				}
 
 				await Api.userRequest("put", player.name, JSON.stringify(playerObject)) //adug datele player`ului in baza de date (nume, jocuri ramase si finalizate)
-					.then(data => GameFinished.setAvgTime(data[1].avgTime));
+					.then(data => {
+						GameFinished.setAvgTime(data[1].avgTime)
+						levelPosition = data[2]
+					});
 
-				Api.leaderboardRequest("put", currentLevel, '', JSON.stringify(levelObject))//request verfic daca timpul actual este mai bun decat timpul din baza de date (daca exista) si inlocuiesc/adaug
+				Api.leaderboardRequest("get", currentLevel, player.name)
 					.then((response) => {
-						levelPosition = response;
-
-						Api.leaderboardRequest("get", currentLevel, player.name)
-							.then((response) => {
-								bestLevelTime = response;
-							})
-							.then(() => {
-								if (levelPosition > 10) {
-									document.querySelector('.leaderboard.player').innerHTML = `
+						bestLevelTime = response;
+					})
+					.then(() => {
+						if (levelPosition > 10) {
+							document.querySelector('.leaderboard.player').innerHTML = `
 									<li class="leaderboard-entry d-flex">
 										<i class="fas fa-star d-flex align-self-center"></i>
 										<div class="w-100 d-flex justify-content-between">
@@ -92,11 +89,10 @@ function validateGame() {
 										</div>
 									</li>
 								`
-								} else {
-									getLevelLeaderboard(currentLevel);
-								}
-							});
-					})
+						} else {
+							getLevelLeaderboard(currentLevel);
+						}
+					});
 			}
 
 			levelFinishedAnimations();

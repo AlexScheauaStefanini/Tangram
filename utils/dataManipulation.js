@@ -29,9 +29,39 @@ class Data {
     return levels()[levelNo];
   }
 
-  static getLevelKeysArray(){
+  static getLevelKeysArray() {
     return Object.keys(levels());
+  }
+
+  static generateLevelTime(name, data, internalTime) {
+    let levelData = data.gamesFinished[data.gamesFinished.length - 1];
+  
+    let levelTimeObject = {
+      level: parseInt(levelData.level),
+      levelInfo: {
+        name: name,
+        [name]: internalTime,
+      }
+    };
+    return levelTimeObject;
   }
 }
 
-module.exports = Data;
+function Timer() {
+  let startTime;
+  let stopTime;
+
+  this.startTimer = () => {
+    startTime = Date.now();
+  }
+
+  this.stopTimer = () => {
+    stopTime = Date.now();
+    return parseInt((stopTime-startTime)/1000);
+  }
+}
+
+module.exports = {
+  Data:Data,
+  Timer:Timer
+};

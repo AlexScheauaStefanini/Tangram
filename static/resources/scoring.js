@@ -48,7 +48,7 @@ let LevelSelector = {
 
   nextLevel: function () {
     for (let i = 0; i < player.gamesFinished.length; i++) {
-      if (player.gamesFinished.length !== 0 && currentLevel === player.gamesFinished[i].level || currentLevel === 0) {
+      if (player.gamesFinished.length !== 0 ) { //&& currentLevel === player.gamesFinished[i].level || currentLevel === 0 // deprecated since skip button
         this.currentLevel = Math.floor(Math.random() * player.gamesRemaining.length);
         return this.currentLevel;
       }

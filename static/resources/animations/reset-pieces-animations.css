@@ -1,35 +1,28 @@
-.reset-big-t{
+.reset-big-t {
   animation: reset-big-t 1s;
 }
 
-
-.reset-big-{
+.reset-big- {
   animation: reset-big- 1s;
 }
 
-
-.reset-med-t{
+.reset-med-t {
   animation: reset-med-t 1s;
 }
 
-
-  
-.reset-para{
+.reset-para {
   animation: reset-para 1s;
 }
 
-
-.reset-small-t{
+.reset-small-t {
   animation: reset-small-t 1s;
 }
 
-
-
-.reset-small-{
+.reset-small- {
   animation: reset-small- 1s;
 }
 
-
-.reset-square {
+.reset-square  {
   animation: reset-square 1s;
 }
+

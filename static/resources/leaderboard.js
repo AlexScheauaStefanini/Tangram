@@ -13,12 +13,19 @@ function getAverageLeaderboard(){
 }
 
 function drawLeaderboard(array,level) {
+  if(level == 1){ //remove tutorial levelboard
+    return
+  }
+
+  let levelNo; // levelNo that is shown in the leaderboard is taken from the .btn-level on the page
+  
   let leaderboard = document.querySelector('.leaderboard');
   let leaderboardTitle = document.querySelector('#leaderboard-title-text')
   let leaderboardComponent = '';
 
   if(level){
-    leaderboardTitle.innerText = `LEVEL ${level} LEADERBOARD`;
+    levelNo = document.querySelector('.btn-level span').innerText;
+    leaderboardTitle.innerText = `PUZZLE ${levelNo} LEADERBOARD`;
   } else {
     leaderboardTitle.innerText = `AVERAGE TIMES LEADERBOARD`;
     level = '';
@@ -59,16 +66,20 @@ function leaderboardSecondsToMinutes(time,level) {
   let seconds = time % 60;
   if(!level){
     if (seconds < 10) {
-      return minutes + ':0' + seconds.toFixed(2);
+      return `${minutes}<span>m</span> 0${setSMsDisplay(seconds.toFixed(2))}`;
     } else {
-      return minutes + ':' + seconds.toFixed(2);
+      return `${minutes}<span>m</span> ${setSMsDisplay(seconds.toFixed(2))}`;
     }
   } else {
     if (seconds < 10) {
-      return minutes + ':0' + seconds;
+      return `${minutes}<span>m</span> 0${seconds}<span>s</span>`;
     } else {
-      return minutes + ':' + seconds;
+      return `${minutes}<span>m</span> ${seconds}<span>s</span>`;
     }
+  }
+
+  function setSMsDisplay(time){
+    return time.split('.').join('<span>s</span> ') + '<span>ms</span>';
   }
   
 }

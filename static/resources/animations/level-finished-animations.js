@@ -9,7 +9,7 @@ function levelFinishedAnimations() {
 
   let windowCenter = window.innerWidth / 2 - document.querySelector('#game').offsetLeft - document.querySelector('#game').offsetWidth / 2;
 
-
+  skipButton.disappear();
   levelFinishedCss.insertRule(`@keyframes game-level-finished{
     0%{transform: translateX(0);}
     100%{transform: translateX(calc(${windowCenter}px));}

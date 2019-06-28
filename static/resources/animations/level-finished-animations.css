@@ -86,3 +86,18 @@
     transform: translateX(600px);
   }
 }
+
+.skip-button-disappear {
+  animation: skip-button-appear 1s;
+  opacity: 0;
+  display: none;
+}
+
+@keyframes skip-button-disappear {
+  0% {
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}

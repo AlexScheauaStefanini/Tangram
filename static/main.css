@@ -291,6 +291,11 @@ button.btn:hover{
     background-color: #518DB2;
 }
 
+.skip-level {
+    display: none;
+    opacity: 0;
+}
+
 #stroke {
     width: 1px;
     min-height: 120%;
@@ -366,8 +371,11 @@ button.btn:hover{
 }
 
 .leaderboard li .leaderboard-text {
-    
     font-size: 1.4rem;
+}
+
+.leaderboard li .leaderboard-text span {
+    font-size: 60%;
 }
 
 .leaderboard .first .leaderboard-text{
@@ -492,4 +500,15 @@ button.btn:hover{
     .game-container{
         flex-wrap: nowrap !important;
     }
+}
+
+
+#devOnly { 
+    color: #fff;
+    opacity: .3;
+    font-size: 24px;
+    position: absolute;
+    left: 47.5%;
+    top: 28%;
+    pointer-events: none;
 }

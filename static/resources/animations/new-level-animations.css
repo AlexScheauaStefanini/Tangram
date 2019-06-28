@@ -68,3 +68,18 @@
       opacity: 1;
   }
 }
+
+.skip-button-appear {
+  display: inline-block;
+  animation: skip-button-appear 1s;
+  opacity: 1;
+}
+
+@keyframes skip-button-appear {
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}

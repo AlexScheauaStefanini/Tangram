@@ -1,5 +1,6 @@
 //https://vectr.com/ascheaua/bFSFoU14Y
 let dragOffsetY = document.querySelector("#drag-container").offsetTop;
+let dragOffsetX = document.querySelector("#drag-container").offsetLeft;
 let gameOffsetX = document.querySelector("#game").offsetLeft;
 let gameOffsetY = document.querySelector("#game").offsetTop;
 
@@ -71,14 +72,13 @@ function gameInitialize(game) {
 		currentLevel = "1"; //resetez progresul utilizatorului si incep cu tutorialul
 		levelTimer.startTimer();
 
-	} else if (!(player.gamesRemaining[LevelSelector.nextLevel()])) {
-		return; //daca incerc sa trec la nivelul urmator fara sa termin nivelul curent ies din functie
-
 	} else if (game === "next") {
 		currentLevel = player.gamesRemaining[LevelSelector.nextLevel()];
 		levelTimer = new timer();
 		levelTimer.startTimer();
 	}
+
+	devOnly();
 	//to uncomment
 	Api.getLevelValidationSet(currentLevel)
 	.then(data => player.setCurrentLevelValidationSet(data)); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
@@ -89,14 +89,14 @@ function gameInitialize(game) {
 	if (player.gamesFinished.length === 0) {
 		document.querySelector('.btn-level').innerText = "Tutorial";
 	} else {
-		document.querySelector('.btn-level').innerText = "Puzzle " + (player.gamesFinished.length);
+		document.querySelector('.btn-level').innerHTML = `Puzzle <span>${player.gamesFinished.length}</span>`;
 	}
 
 	try {
 		new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
 	}
 	catch (err) {
-		document.querySelector('#drag-container').style.width = 600+'px';
+		document.querySelector('#drag-container').style.width = 600 + 'px';
 		console.log("ResizeObserver not available");
 	}
 
@@ -110,6 +110,7 @@ function gameInitialize(game) {
 
 function resetOffsets() {
 	dragOffsetY = document.querySelector("#drag-container").offsetTop;
+	dragOffsetX = document.querySelector("#drag-container").offsetLeft;
 	gameOffsetX = document.querySelector("#game").offsetLeft;
 	gameOffsetY = document.querySelector("#game").offsetTop;
 }
@@ -123,4 +124,12 @@ window.onresize = () => {
 
 	resetOffsets();
 	resetPieces();
+}
+
+//////////////////////
+////// devOnly ///////
+//////////////////////
+
+function devOnly(){
+	document.querySelector('#devOnly').innerText = `devonly ${currentLevel}`;
 }

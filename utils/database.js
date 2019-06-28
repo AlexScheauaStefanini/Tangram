@@ -12,16 +12,14 @@ class Database { //class for Firebase interaction
       .then(snapshot => snapshot.val());
   };
   //set user data in database
-  static setUser(name, user) {
+  static async setUser(name, user) {
     db.ref(`users/${name}`).set({
       gamesFinished: user.gamesFinished,
       gamesRemaining: user.gamesRemaining
-    }, (error) => {
+    },(error) => {
       if (error) {
         return "error";
-      } else {
-        return "success";
-      };
+      }
     })
   };
 
@@ -34,8 +32,8 @@ class Database { //class for Firebase interaction
   //set user level time to database leaderboard
   static async setLevelTime(level, player) {
     let currentDbTime = await this.getLevelTime(level, player.name);
-
-    if (currentDbTime && currentDbTime > player[player.name] || !currentDbTime) { //if there is already a time in the leaderbpard and the time in the leaderboard is bigger than the current time
+    
+    if (currentDbTime && currentDbTime > player[player.name] || !currentDbTime) { //if there is already a time in the leaderbpard and the time in the leaderboard is bigger than the current time  
       db.ref(`leaderboard/${level}/${player.name}`).set(player[player.name], (error) => { //or if there isn`t a time in the leaderboard, i update the time
         if (error) {
           return "error";
