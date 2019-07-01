@@ -251,7 +251,7 @@ button.btn:hover{
     cursor: grab;
     fill-opacity: 0;
     stroke: #CAD400;
-    stroke-width: 1px;
+    stroke-width: 2px;
     box-sizing: content-box;
 }
 
@@ -299,7 +299,7 @@ button.btn:hover{
 #stroke {
     width: 1px;
     min-height: 120%;
-    border: 0.5px dashed #fff;
+    border: 0.5px dashed #518DB2;
 }
 
 #drag-container {
@@ -469,8 +469,12 @@ button.btn:hover{
     width: 100%;
 }
 
+.opacity20 {
+    opacity: .2;
+}
 
-/* schimb directia div`ului de game; */
+
+/* gamecontainer vertical instead of horizontal */
 @media only screen and (max-width: 1365px){
     .game-container {
         flex-direction: column;

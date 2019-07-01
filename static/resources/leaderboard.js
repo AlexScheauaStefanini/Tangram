@@ -1,34 +1,42 @@
 function getLevelLeaderboard(level) {
   Api.leaderboardRequest('get', level)
     .then(response => {
-      drawLeaderboard(response,level);
+      drawLeaderboard(response, level);
     })
 }
 
-function getAverageLeaderboard(){
+function getAverageLeaderboard() {
   Api.avgLeaderboardRequest()
-  .then(response => {
-    drawLeaderboard(response);
-  })
+    .then(response => {
+      drawLeaderboard(response);
+    })
 }
 
-function drawLeaderboard(array,level) {
-  if(level == 1){ //remove tutorial levelboard
+function drawLeaderboard(array, level) {
+  if (level == 1) { //remove tutorial levelboard
     return
   }
 
   let levelNo; // levelNo that is shown in the leaderboard is taken from the .btn-level on the page
-  
+
   let leaderboard = document.querySelector('.leaderboard');
   let leaderboardTitle = document.querySelector('#leaderboard-title-text')
   let leaderboardComponent = '';
 
-  if(level){
+  if (level) {
     levelNo = document.querySelector('.btn-level span').innerText;
     leaderboardTitle.innerText = `PUZZLE ${levelNo} LEADERBOARD`;
   } else {
     leaderboardTitle.innerText = `AVERAGE TIMES LEADERBOARD`;
     level = '';
+  }
+
+  if (!array.length) {
+    leaderboardComponent = `
+      <li class="leaderboard-entry d-flex justify-content-center">
+        <p class="leaderboard-text opacity20">No one finished this level yet</p>
+      </li>
+    `
   }
 
   for (let i = 0; i < array.length; i++) {
@@ -39,7 +47,7 @@ function drawLeaderboard(array,level) {
           <div class="w-100 d-flex justify-content-between">
             <p class="leaderboard-text text-start">${i + 1}</p>
             <p class="leaderboard-text text-center">${array[i][0]}</p>
-            <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1],level)}</p>
+            <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1], level)}</p>
           </div>
         </li>
       `
@@ -48,7 +56,7 @@ function drawLeaderboard(array,level) {
         <li class="leaderboard-entry d-flex justify-content-between">
           <p class="leaderboard-text text-start">${i + 1}</p>
           <p class="leaderboard-text text-center">${array[i][0]}</p>
-          <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1],level)}</p>
+          <p class="leaderboard-text text-end">${leaderboardSecondsToMinutes(array[i][1], level)}</p>
         </li>
       `
     }
@@ -61,10 +69,10 @@ function drawLeaderboard(array,level) {
   listItems[2] ? listItems[2].classList.add('third') : '';
 }
 
-function leaderboardSecondsToMinutes(time,level) {
+function leaderboardSecondsToMinutes(time, level) {
   let minutes = parseInt(time / 60);
   let seconds = time % 60;
-  if(!level){
+  if (!level) {
     if (seconds < 10) {
       return `${minutes}<span>m</span> 0${setSMsDisplay(seconds.toFixed(2))}`;
     } else {
@@ -78,8 +86,8 @@ function leaderboardSecondsToMinutes(time,level) {
     }
   }
 
-  function setSMsDisplay(time){
+  function setSMsDisplay(time) {
     return time.split('.').join('<span>s</span> ') + '<span>ms</span>';
   }
-  
+
 }

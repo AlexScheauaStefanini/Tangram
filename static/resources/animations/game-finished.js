@@ -15,7 +15,7 @@ let GameFinished = {
       
         <p>Congrats ${player.name}, You have finished all the puzzles</p>
         <p>Your average time per puzzle is: </p>
-        <p> ${leaderboardSecondsToMinutes(GameFinished.avgTime)} s.</p>
+        <p> ${leaderboardSecondsToMinutes(GameFinished.avgTime)}</p>
         <p>Think you can do better?</p>
         <button class="btn" onclick="removeModal();removeLevelFinishedAnimations();gameInitialize('new')">New game</button>
 

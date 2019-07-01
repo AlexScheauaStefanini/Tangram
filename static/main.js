@@ -61,6 +61,7 @@ function gameInitialize(game) {
 	if (levelTimer) {
 		levelTimer.stopTimer(); //opresc cronometrul existent daca exista
 	}
+	DragElements.stopDrag();
 
 	// if(typeof game === "number"){
 	// 	currentLevel = game;
@@ -92,7 +93,7 @@ function gameInitialize(game) {
 		document.querySelector('.btn-level').innerHTML = `Puzzle <span>${player.gamesFinished.length}</span>`;
 	}
 
-	try {
+	try { //ResizeObserver will resize the dragContainer with the width of the level container. Centers the stroke in the game
 		new ResizeObserver(() => document.querySelector('#drag-container').style.width = document.querySelector('#game').clientWidth + 'px').observe(document.querySelector('#game'));
 	}
 	catch (err) {

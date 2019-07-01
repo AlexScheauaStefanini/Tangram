@@ -41,8 +41,7 @@ function resetPieces() {
 
     document.querySelector(`.reset-${id}`).addEventListener('animationend', () => {
       resetButton.setAttribute('onclick', 'resetPieces();');//pun functia de resetPieces de pe buton la sfarsitul animatiei
-      
-      
+
       // piesele raman pe locul unde ajung dupa animatie
       if (pieces[i].firstElementChild.classList.contains('in-place')) {
         pieces[i].style.top = inPlacePositions[id].top + gameOffsetY + 'px';
