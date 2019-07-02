@@ -1,6 +1,6 @@
 // Functie rotate.
 let rotatePieces = (e) => {
-	e.preventDefault(); // prevent rightclick menu
+	e.preventDefault();
 
 	let possibleRotationArr = ["rotate(0deg)", "rotate(45deg)", "rotate(90deg)", "rotate(135deg)", "rotate(180deg)", "rotate(225deg)", "rotate(270deg)", "rotate(315deg)"]
 
@@ -22,20 +22,15 @@ let rotatePieces = (e) => {
 			} else {
 				elementRotation.transform = possibleRotationArr[possibleRotationArr.indexOf(elementRotation.transform) + 1];
 			}
-
+			validateMove(e.target.closest(".piece"));
 		}
 	}
 }
 
 if (/Mobi/.test(navigator.userAgent)) { //doubletap for touchscreen
-	document.querySelector('.game-container').ondblclick = rotatePieces;
+	document.querySelector('.game-container').ondblclick = rotatePieces; //mobile safari doesnt have ondblclick event
 } else {
 	document.querySelector('.game-container').oncontextmenu = rotatePieces; //right click for mouse
-}
-
-function endDrag(elmnt) {
-	validateMove(elmnt);
-	validateGame();
 }
 
 let DragElements = {
@@ -50,12 +45,12 @@ let DragElements = {
 					this.pieces[i].style.zIndex = 2
 				},
 				onMouseUp: () => {
-					endDrag(this.pieces[i]);																													//to uncomment
+					validateMove(this.pieces[i]);
 				},
 	
 				onTouchMove: () => { this.pieces[i].style.zIndex = 2 },
 				onTouchStop: () => {
-					endDrag(this.pieces[i]);
+					validateMove(this.pieces[i]);
 				}
 			};
 			

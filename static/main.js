@@ -53,7 +53,7 @@ async function createPlayer() {
 				playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
 			}
 		})
-		localStorage.setItem("name", apiUsername);
+	localStorage.setItem("name", apiUsername);
 }
 
 let levelTimer = '';
@@ -79,11 +79,14 @@ function gameInitialize(game) {
 		levelTimer.startTimer();
 	}
 
+	//////////////////////
+	////// devOnly ///////
+	//////////////////////
 	devOnly();
-	//to uncomment
+
 	Api.getLevelValidationSet(currentLevel)
-	.then(data => player.setCurrentLevelValidationSet(data)); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
-	 
+		.then(data => player.setCurrentLevelValidationSet(data)); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
+
 	document.querySelector('.leaderboard.player').innerHTML = ''; // sterg ultimul rand din leaderboard
 
 	document.querySelector('.btn-name').innerText = player.name;
@@ -117,8 +120,8 @@ function resetOffsets() {
 }
 
 let windowWidth = window.innerWidth;
-window.onresize = () => { 	
-	if(this.innerWidth === windowWidth){ //resetez piesele si offsetul doar daca resizeul este pe width, si nu pe height
+window.onresize = () => {
+	if (this.innerWidth === windowWidth) { //resetez piesele si offsetul doar daca resizeul este pe width, si nu pe height
 		return;
 	}
 	windowWidth = this.innerWidth;
@@ -131,6 +134,6 @@ window.onresize = () => {
 ////// devOnly ///////
 //////////////////////
 
-function devOnly(){
+function devOnly() {
 	document.querySelector('#devOnly').innerText = `devonly ${currentLevel}`;
 }

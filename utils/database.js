@@ -96,7 +96,7 @@ class Database { //class for Firebase interaction
   //get all the leaderboards
   static async getAllLevelBoards() {
     let levelboards;
-    await db.ref('leaderboard').once('value')
+    await db.ref(`leaderboard`).once('value')
       .then(snapshot => {
         levelboards = snapshot;
       })

@@ -21,15 +21,12 @@ function validateMove(elmnt) {
 		let elementPositionY = parseInt(elmnt.style.top);
 		let elementBoundariesX = pieceValidationSet[i].left + gameOffsetX;
 		let elementPositionX = parseInt(elmnt.style.left);
-		// console.log(elementPositionY,elementPositionY);
-
-
 
 		if (elementBoundariesY + boundaries > elementPositionY && elementBoundariesX + boundaries > elementPositionX) {
 			if (elementBoundariesY - boundaries < elementPositionY && elementBoundariesX - boundaries < elementPositionX && elmnt.style.transform === pieceValidationSet[i].transform) {
 				setTimeout(() => {
-					elmnt.style.top = elementBoundariesY + "px";  // aliniez pozitia elementului cu cea corecta pe axa Y (snap Y)
-					elmnt.style.left = elementBoundariesX + "px"; // aliniez pozitia elementului cu cea corecta pe axa X (snap X)
+					elmnt.style.top = elementBoundariesY + "px";  // (snap Y)
+					elmnt.style.left = elementBoundariesX + "px"; // (snap X)
 					inPlacePositions[elmnt.firstElementChild.id] = { top: elementBoundariesY - gameOffsetY, left: elementBoundariesX - gameOffsetX }
 				}, 30)
 
@@ -41,45 +38,42 @@ function validateMove(elmnt) {
 
 				elmnt.style.zIndex = 0;
 				elmnt.firstElementChild.classList.add("in-place"); // schimb culoarea si scot eventurile de pe element
+
+				if (!Object.keys(player.currentLevelValidationSet).length) { //if the levelvalidationset is empty run validate game
+					validateGame();
+				}
 			}
 		}
 	}
 }
 
 function validateGame() {
-	let gameWon = Object.keys(player.currentLevelValidationSet).length === 0;
 	setTimeout(async () => {
-		if (gameWon) {
-			DragElements.stopDrag();
-			let currentLevelTime = player.levelComplete(currentLevel);
+		DragElements.stopDrag();
+		let currentLevelTime = player.levelComplete(currentLevel);
 
-			if (parseInt(currentLevel) !== 1) { //nu pun in baza de date primul nivel (tutorialul)
-				let bestLevelTime = 0;
-				let levelPosition = 0;
+		if (parseInt(currentLevel) !== 1) { //nu pun in baza de date primul nivel (tutorialul)
+			let bestLevelTime = 0;
+			let levelPosition = 0;
 
-				let playerObject = {
-					"gamesRemaining": player.gamesRemaining,
-					"gamesFinished": player.gamesFinished
-				}
+			let playerObject = {
+				"gamesRemaining": player.gamesRemaining,
+				"gamesFinished": player.gamesFinished
+			}
 
-				let levelObject = {
-					name: `${player.name}`,
-					[player.name]: currentLevelTime
-				}
+			await Api.userRequest("put", player.name, JSON.stringify(playerObject)) //adug datele player`ului in baza de date (nume, jocuri ramase si finalizate)
+				.then(data => {
+					GameFinished.setAvgTime(data[1].avgTime)
+					levelPosition = data[2]
+				});
 
-				await Api.userRequest("put", player.name, JSON.stringify(playerObject)) //adug datele player`ului in baza de date (nume, jocuri ramase si finalizate)
-					.then(data => {
-						GameFinished.setAvgTime(data[1].avgTime)
-						levelPosition = data[2]
-					});
-
-				Api.leaderboardRequest("get", currentLevel, player.name)
-					.then((response) => {
-						bestLevelTime = response;
-					})
-					.then(() => {
-						if (levelPosition > 10) {
-							document.querySelector('.leaderboard.player').innerHTML = `
+			Api.leaderboardRequest("get", currentLevel, player.name)
+				.then((response) => {
+					bestLevelTime = response;
+				})
+				.then(() => {
+					if (levelPosition > 10) {
+						document.querySelector('.leaderboard.player').innerHTML = `
 									<li class="leaderboard-entry d-flex">
 										<i class="fas fa-star d-flex align-self-center"></i>
 										<div class="w-100 d-flex justify-content-between">
@@ -89,16 +83,15 @@ function validateGame() {
 										</div>
 									</li>
 								`
-						} else {
-							getLevelLeaderboard(currentLevel);
-						}
-					});
-			}
+					} else {
+						getLevelLeaderboard(currentLevel);
+					}
+				});
+		}
 
-			levelFinishedAnimations();
-			if (!player.gamesRemaining.length) {
-				GameFinished.createModal();
-			}
+		levelFinishedAnimations();
+		if (!player.gamesRemaining.length) {
+			GameFinished.createModal();
 		}
 	}, 60)
 }
