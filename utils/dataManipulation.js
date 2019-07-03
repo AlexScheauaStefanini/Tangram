@@ -1,21 +1,21 @@
-const levels = require('./levels')
+const getLevels = require('./levels')
 
-class Data {
+let Data = {
 
-  static setAvgTime(player, timesArr) {
+  setAvgTime: (player, timesArr) => {
     let totalTime = 0;
 
-    for (let i = 1; i < timesArr.length; i++) { // i = 1 pentru a nu include si tutorialul in calcul
+    for (let i = 1; i < timesArr.length; i++) { // i = 1 to exclude tutorial from the leaderboards
       totalTime += timesArr[i].timeScore;
     }
 
     return {
       name: player,
-      avgTime: parseFloat((totalTime / (timesArr.length - 1)).toFixed(2)) // -1 pentru a nu include si tutorialul in calcul
+      avgTime: parseFloat((totalTime / (timesArr.length - 1)).toFixed(2)) // -1 to exclude tutorial from the leaderboards
     }
-  }
+  },
 
-  static generateAvgTimeLeaderboard(object) {
+  generateAvgTimeLeaderboard: (object) => {
     let playerArray = [];
 
     object.forEach(user => {
@@ -23,19 +23,19 @@ class Data {
     });
 
     return playerArray;
-  }
+  },
 
-  static getLevelValidationSet(levelNo) {
-    return levels()[levelNo];
-  }
+  getLevelValidationSet: (levelNo) => {
+    return getLevels()[levelNo];
+  },
 
-  static getLevelKeysArray() {
-    return Object.keys(levels());
-  }
+  getLevelKeysArray: () => {
+    return Object.keys(getLevels());
+  },
 
-  static generateLevelTime(name, data, internalTime) {
+  generateLevelTime: (name, data, internalTime) => {
     let levelData = data.gamesFinished[data.gamesFinished.length - 1];
-  
+
     let levelTimeObject = {
       level: parseInt(levelData.level),
       levelInfo: {
@@ -44,24 +44,24 @@ class Data {
       }
     };
     return levelTimeObject;
+  },
+
+  Timer: function() {
+    let startTime;
+    let stopTime;
+  
+    this.startTimer = () => {
+      startTime = Date.now();
+    }
+  
+    this.stopTimer = () => {
+      stopTime = Date.now();
+      return parseInt((stopTime - startTime) / 1000);
+    }
   }
 }
 
-function Timer() {
-  let startTime;
-  let stopTime;
 
-  this.startTimer = () => {
-    startTime = Date.now();
-  }
 
-  this.stopTimer = () => {
-    stopTime = Date.now();
-    return parseInt((stopTime-startTime)/1000);
-  }
-}
-
-module.exports = {
-  Data:Data,
-  Timer:Timer
-};
+module.exports = Data;
+  

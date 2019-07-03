@@ -1,6 +1,5 @@
 const Database = require('./utils/database');
-const Data = require('./utils/dataManipulation').Data;
-const Timer = require('./utils/dataManipulation').Timer;
+const Data = require('./utils/dataManipulation');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -10,7 +9,6 @@ app.use(cors());
 
 let levelTimer;
 
-//
 app.get('/api/validate/:userInput', (req, res) => {
   let regEx = new RegExp('[^a-zA-Z0-9]', 'g'); //name validation
   let username = req.params.userInput.trim();
@@ -25,7 +23,7 @@ app.get('/api/validate/:userInput', (req, res) => {
 //get user from Firebase
 app.get('/api/users/:name', async (req, res) => {
   let user = await Database.getUser(req.params.name);
-  levelTimer = new Timer();
+  levelTimer = new Data.Timer();
   if (user) {
     res.status(200).send(JSON.stringify(user));
   } else {

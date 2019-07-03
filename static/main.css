@@ -187,7 +187,6 @@ button.btn:hover{
     border-radius: 50%;
     transform: translateY(200px);
     animation: input-group-loading 3s;
-    transition: .5s;
     opacity: 0.7;
 }
 
@@ -354,7 +353,7 @@ button.btn:hover{
 
 .leaderboard {
     margin: 50px 0;
-    width: 40%;
+    width: 50%;
 }
 
 .leaderboard li {
@@ -365,31 +364,30 @@ button.btn:hover{
 .leaderboard li i {
     width: 0;
     position: relative;
-    left: -30px;
+    left: 80px;
     font-size: 1.4rem;
     color: #518DB2;
 }
 
 .leaderboard li .leaderboard-text {
     font-size: 1.4rem;
+    width: 33%;
+    text-align: center;
 }
 
 .leaderboard li .leaderboard-text span {
     font-size: 60%;
 }
 
-.leaderboard .first .leaderboard-text{
-    
+.leaderboard .first .leaderboard-text{   
     font-size: 3.1rem;
 }
 
-.leaderboard .second .leaderboard-text{
-    
+.leaderboard .second .leaderboard-text{   
     font-size: 2.5rem;
 }
 
 .leaderboard .third .leaderboard-text{
-    
     font-size: 2rem;
 }
 
@@ -500,13 +498,70 @@ button.btn:hover{
 
 }
 
-@media only screen and (max-width: 1550px){
-    .game-container{
-        flex-wrap: nowrap !important;
+@media only screen and (max-width: 768px){
+    .title-star{
+        height: 100%;
+        font-size: 18px;
+        padding: 5px;
+        top: -6px;
+    }
+
+    .leaderboard-title {
+        font-size: 2rem;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .leaderboard {
+        margin: 50px 0;
+        width: 100%;
+    }
+    
+    .leaderboard li {
+        margin: 10px 0 10px 10px;
+    }
+    
+    .leaderboard li i {
+        display: none;
+    }
+    
+    .leaderboard li .leaderboard-text {
+        font-size: 0.8rem;
+    }
+
+    .leaderboard li .text-start {
+        width: 10%;
+    }
+
+    .leaderboard li .text-center {
+        width: 45%;
+    }
+
+    .leaderboard li .text-end {
+        width: 45%;
+    }
+    
+    .leaderboard li .leaderboard-text span {
+        font-size: 60%;
+    }
+    
+    .leaderboard .first .leaderboard-text{
+        font-size: 1.8rem;
+    }
+    
+    .leaderboard .second .leaderboard-text{
+        font-size: 1.5rem;
+    }
+    
+    .leaderboard .third .leaderboard-text{
+        font-size: 1rem;
     }
 }
 
 
+/* //////////////////////
+////// devOnly ///////
+////////////////////// */
 #devOnly { 
     color: #fff;
     opacity: .3;
