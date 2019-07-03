@@ -11,12 +11,7 @@
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
 		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-	<link rel="stylesheet" href="main.css">
-	<link rel="stylesheet" href="resources/animations/new-player-animations.css">
-	<link rel="stylesheet" href="resources/animations/new-level-animations.css">
-	<link rel="stylesheet" href="resources/animations/reset-pieces-animations.css">
-	<link rel="stylesheet" href="resources/animations/level-finished-animations.css">
-	<link rel="stylesheet" href="resources/animations/game-finished.css">
+	<link rel="stylesheet" href="./resources/css/main.min.css">
 	<script src="https://kit.fontawesome.com/1a4913cb5c.js"></script>
 
 	<title>Tangram</title>
@@ -73,8 +68,9 @@
 				<p id="timer">Timer</p>
 			</div>
 			<button class="btn" id="next-level">Next Level</button>
+			<button class="btn skip-level" onclick="skipButton.handleClick();">Skip Level</button>
+			
 		</div>
-
 		<!-- Joc -->
 		<div class="game-container d-flex justify-content-center flex-wrap">
 			<div id="game"></div>
@@ -134,21 +130,7 @@
 			<stop offset="75%" stop-color="#518DB2" />
 		</linearGradient>
 	</svg>
-
-	<script src="resources/external/svg-inject.min.js"></script>
-	<script src="resources/animations/new-level-animations.js"></script>
-	<script src="main.js"></script>
-	<script src="resources/levels.js"></script>
-	<script src="resources/api-requests.js"></script>
-	<script src="resources/leaderboard.js"></script>
-	<script src="resources/external/displace.min.js"></script>
-	<script src="resources/pieces-manipulation.js"></script>
-	<script src="resources/validation.js"></script>
-	<script src="resources/scoring.js"></script>
-	<script src="resources/animations/reset-pieces-animations.js"></script>
-	<script src="resources/animations/level-finished-animations.js"></script>
-	<script src="resources/animations/game-finished.js"></script>
-	<script src="resources/animations/new-player-animations.js"></script>
+	<script src="./resources/js/main.min.js"></script>
 </body>
 
 </html>
