@@ -1,4 +1,5 @@
 const Database = require('./utils/database');
+const Data = require('./utils/dataManipulation');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -6,13 +7,13 @@ app.use(express.json());
 app.use(express.static('static'));
 app.use(cors());
 
+let levelTimer;
 
-//
-app.get('/api/validate/:userInput', (req,res) => {
+app.get('/api/validate/:userInput', (req, res) => {
   let regEx = new RegExp('[^a-zA-Z0-9]', 'g'); //name validation
   let username = req.params.userInput.trim();
-  
-  if(regEx.test(username)){
+
+  if (regEx.test(username)) {
     res.status(200).send(false);
   } else {
     res.status(200).send(JSON.stringify(username));
@@ -22,20 +23,50 @@ app.get('/api/validate/:userInput', (req,res) => {
 //get user from Firebase
 app.get('/api/users/:name', async (req, res) => {
   let user = await Database.getUser(req.params.name);
+  levelTimer = new Data.Timer();
   if (user) {
     res.status(200).send(JSON.stringify(user));
   } else {
     res.status(200).send(false);
   }
 })
+//get levelValidationSet
+app.get('/api/levelvalidationset/:levelNo', (req, res) => {
+  let levelValidationSet = Data.getLevelValidationSet(req.params.levelNo);
 
-// post or put user on Firebase
+  levelTimer.startTimer(); //starts backend Timer - called in main in Api.getlevelvalidationset
+
+  if (levelValidationSet) {
+    res.status(200).send(JSON.stringify(levelValidationSet))
+  } else {
+    res.status(404).send("Could not generate validation set");
+  }
+})
+
+app.get('/api/levelkeysarray', (req,res) => {
+  let levelKeys = Data.getLevelKeysArray();
+  if(levelKeys) {
+    res.status(200).send(JSON.stringify(levelKeys));
+  } else {
+    res.status(500).send('Could not get the levels')
+  }
+})
+
+// post or put user data and AvgTime on Firebase
 app.put('/api/users/:name', async (req, res) => {
-  let response = await Database.setUser(req.params.name, req.body);
-  if (response === "error") {
+  let internalTime = levelTimer.stopTimer(); //stops backend timer called in validation in Api.userRequest
+  
+  req.body.gamesFinished[req.body.gamesFinished.length-1].timeScore = internalTime; //puts backend timer in the data that will be sent to server
+  let levelTime = Data.generateLevelTime(req.params.name, req.body, internalTime); //generates levelTime object for level leaderboard
+  
+  let setUser = await Database.setUser(req.params.name, req.body);
+  let setAverageTime = await Database.setAverageTime(Data.setAvgTime(req.params.name, req.body.gamesFinished));
+  let playerPositionInLeaderboard = await Database.setLevelTime(levelTime.level, levelTime.levelInfo); //setLevelTime returns player position
+  
+  if (setUser === "error" || setAverageTime === "error" || playerPositionInLeaderboard === "error") {
     res.status(500).send("User was not saved");
   } else {
-    res.status(200).send(JSON.stringify(req.body));
+    res.status(200).send(JSON.stringify([req.body, setAverageTime, playerPositionInLeaderboard]));
   }
 })
 
@@ -52,7 +83,7 @@ app.get('/api/leaderboard/:level/:name', async (req, res) => {
 // get first 10 players ordered by completition time.
 app.get('/api/leaderboard/:level', async (req, res) => {
   let leaderboard = await Database.getLevelLeaderboard(req.params.level);
-  
+
   res.status(200).send(JSON.stringify(leaderboard));
 })
 //get all leaderboards per level
@@ -61,37 +92,11 @@ app.get('/api/leaderboard', async (req, res) => {
   res.status(200).send(JSON.stringify(leaderboards));
 })
 
-// post or put user level timescore to leaderboard
-app.put('/api/leaderboard/:level', async (req, res) => {
-  let response = await Database.setLevelTime(req.params.level, req.body);
-  
-  if (response === "error") {
-    res.status(500).send("Time was not saved");
-  } else {
-    res.status(200).send(JSON.stringify(response));
-  }
-})
-
-//post or put player avg time
-app.put('/api/avgLeaderboard/:name', async (req, res) => {
-  let response = await Database.setAverageTime(req.body);
-  
-  if (response === "error") {
-    res.status(500).send("Time was not saved");
-  } else {
-    res.status(200).send(JSON.stringify(response));
-  }
-})
-
-//get general avg leaderboard
-app.get('/api/avgLeaderboard', async (req, res)=>{
+//get avg leaderboard
+app.get('/api/avgLeaderboard', async (req, res) => {
   let response = await Database.getAvgLeaderboard();
-  let playerArray = [];
+  let playerArray = Data.generateAvgTimeLeaderboard(response);
 
-  response.forEach(user => {
-    playerArray.push([user.val().name,user.val().avgTime]); 
-  });
-  
   if (response === "error") {
     res.status(404).send("Could not get data");
   } else {
@@ -99,5 +104,5 @@ app.get('/api/avgLeaderboard', async (req, res)=>{
   }
 })
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening to port: ${port}`));
