@@ -5,44 +5,45 @@ Firebase.initializeApp({
 })
 const db = Firebase.database();
 
-class Database { //class for Firebase interaction
+class Database {
+  static test(){ // dev purposes
+    return '';
+  }
   //get user data from database
   static getUser(name) {
-    return db.ref(`users/${name}`).once('value')
+    return db.ref(`${this.test()}users/${name}`).once('value')
       .then(snapshot => snapshot.val());
   };
   //set user data in database
-  static setUser(name, user) {
-    db.ref(`users/${name}`).set({
+  static async setUser(name, user) {
+    db.ref(`${this.test()}users/${name}`).set({
       gamesFinished: user.gamesFinished,
       gamesRemaining: user.gamesRemaining
-    }, (error) => {
+    },(error) => {
       if (error) {
         return "error";
-      } else {
-        return "success";
-      };
+      }
     })
   };
 
   //get user level time from database leaderboard
   static getLevelTime(level, player) {
-    return db.ref(`leaderboard/${level}/${player}`).once('value')
+    return db.ref(`${this.test()}leaderboard/${level}/${player}`).once('value')
       .then(snapshot => snapshot.val());
   }
 
   //set user level time to database leaderboard
   static async setLevelTime(level, player) {
     let currentDbTime = await this.getLevelTime(level, player.name);
-
-    if (currentDbTime && currentDbTime > player[player.name] || !currentDbTime) { //if there is already a time in the leaderbpard and the time in the leaderboard is bigger than the current time
-      db.ref(`leaderboard/${level}/${player.name}`).set(player[player.name], (error) => { //or if there isn`t a time in the leaderboard, i update the time
+    
+    if (currentDbTime && currentDbTime > player[player.name] || !currentDbTime) { //if there is already a time in the leaderbpard and the time in the leaderboard is bigger than the current time  
+      db.ref(`${this.test()}leaderboard/${level}/${player.name}`).set(player[player.name], (error) => { //or if there isn`t a time in the leaderboard, i update the time
         if (error) {
           return "error";
         }
       })
     }
-    return await getPlayerPosition(level, player.name);
+    return await this.getPlayerPosition(level, player.name);
   }
 
   //set user avg time
@@ -52,7 +53,7 @@ class Database { //class for Firebase interaction
       name: obj.name
     }
 
-    await db.ref(`avgLeaderboard/${obj.name}`).set(object, (error) => {
+    await db.ref(`${this.test()}avgLeaderboard/${obj.name}`).set(object, (error) => {
       if (error) {
         return "error";
       }
@@ -64,7 +65,7 @@ class Database { //class for Firebase interaction
   //get avgLeaderboard 
   static async getAvgLeaderboard() {
     let avgLeaderboard = []
-    await db.ref(`avgLeaderboard`).orderByChild('avgTime').once('value')
+    await db.ref(`${this.test()}avgLeaderboard`).orderByChild('avgTime').once('value')
       .then(snapshot => {
         snapshot.forEach(user => {
           avgLeaderboard.push(user);
@@ -77,7 +78,7 @@ class Database { //class for Firebase interaction
   //get the first 10 players ordered by their level finishing time
   static async getLevelLeaderboard(level) {
     let lvlLeaderboard = [];
-    await db.ref(`leaderboard/${level}`).orderByValue().limitToFirst(10).once('value')
+    await db.ref(`${this.test()}leaderboard/${level}`).orderByValue().limitToFirst(10).once('value')
       .then(snapshot => {
         snapshot.forEach(time => {
           lvlLeaderboard.push([time.key, time.val()]);
@@ -88,7 +89,7 @@ class Database { //class for Firebase interaction
   //get all the players that finished a level. called by getPlayerPosition()
   static async getLevelBoard(level) {
     let lvlBoard = [];
-    await db.ref(`leaderboard/${level}`).orderByValue().once('value').then(snapshot => {
+    await db.ref(`${this.test()}leaderboard/${level}`).orderByValue().once('value').then(snapshot => {
       snapshot.forEach(time => {
         lvlBoard.push([time.key, time.val()]);
       })
@@ -98,20 +99,20 @@ class Database { //class for Firebase interaction
   //get all the leaderboards
   static async getAllLevelBoards() {
     let levelboards;
-    await db.ref('leaderboard').once('value')
+    await db.ref(`${this.test()}leaderboard`).once('value')
       .then(snapshot => {
         levelboards = snapshot;
       })
     return levelboards;
   }
-}
 
-async function getPlayerPosition(level, player) { // callback for Database.setLevelTime .returns the position of the player in the leaderboard
-  let levelBoard = await Database.getLevelBoard(level);
-
-  for (let i = 0; i < levelBoard.length; i++) {
-    if (levelBoard[i].indexOf(player) !== -1) {
-      return i + 1;
+  static async getPlayerPosition(level, player) { // callback for Database.setLevelTime .returns the position of the player in the leaderboard
+    let levelBoard = await Database.getLevelBoard(level);
+  
+    for (let i = 0; i < levelBoard.length; i++) {
+      if (levelBoard[i].indexOf(player) !== -1) {
+        return i + 1;
+      }
     }
   }
 }
