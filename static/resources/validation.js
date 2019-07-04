@@ -50,7 +50,7 @@ function validateMove(elmnt) {
 function validateGame() {
 	setTimeout(async () => {
 		DragElements.stopDrag();
-		let currentLevelTime = player.levelComplete(currentLevel);
+		player.levelComplete(currentLevel);
 
 		if (parseInt(currentLevel) !== 1) { //nu pun in baza de date primul nivel (tutorialul)
 			let bestLevelTime = 0;

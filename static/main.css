@@ -57,6 +57,7 @@ body {
     position: absolute;
     top: 45px;
     right: 20px;
+    z-index: 1;
 }
 
 .title-star-button{
@@ -153,7 +154,7 @@ button.btn:hover{
     outline-width: 0;
 }
 
-#player-nickname-input::placeholder{
+#player-nickname-input::-webkit-input-placeholder{
     font-style: italic;
     font-size: 20px;
     letter-spacing: 0px;
@@ -161,9 +162,9 @@ button.btn:hover{
 }
 
 .empty-input {
-    /* border:1px solid red !important; */
     box-shadow: 0 0 50px red !important;
 }
+
 .empty-input::placeholder{
     color: red !important;
     opacity: 1;

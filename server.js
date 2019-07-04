@@ -13,10 +13,10 @@ app.get('/api/validate/:userInput', (req, res) => {
   let regEx = new RegExp('[^a-zA-Z0-9]', 'g'); //name validation
   let username = req.params.userInput.trim();
 
-  if (regEx.test(username)) {
-    res.status(200).send(false);
-  } else {
+  if (!regEx.test(username) && username.length > 3 && username.length < 11) {
     res.status(200).send(JSON.stringify(username));
+  } else {
+    res.status(200).send(false);
   }
 })
 

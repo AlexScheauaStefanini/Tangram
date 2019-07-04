@@ -1,4 +1,3 @@
-//https://vectr.com/ascheaua/bFSFoU14Y
 let dragOffsetY = document.querySelector("#drag-container").offsetTop;
 let dragOffsetX = document.querySelector("#drag-container").offsetLeft;
 let gameOffsetX = document.querySelector("#game").offsetLeft;
@@ -79,10 +78,7 @@ function gameInitialize(game) {
 		levelTimer.startTimer();
 	}
 
-	//////////////////////
-	////// devOnly ///////
-	//////////////////////
-	devOnly();
+	try {devOnly()} catch (error) {} //prints internal level number on screen
 
 	Api.getLevelValidationSet(currentLevel)
 		.then(data => player.setCurrentLevelValidationSet(data)); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
@@ -130,10 +126,3 @@ window.onresize = () => {
 	resetPieces();
 }
 
-//////////////////////
-////// devOnly ///////
-//////////////////////
-
-function devOnly() {
-	document.querySelector('#devOnly').innerText = `devonly ${currentLevel}`;
-}
