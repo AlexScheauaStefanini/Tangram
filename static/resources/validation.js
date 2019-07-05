@@ -16,7 +16,7 @@ function validateMove(elmnt) {
 	let pieceValidationSet = player.currentLevelValidationSet[elmntId];
 
 	for (let i = 0; i < pieceValidationSet.length; i++) {
-		//aliniez coordonatele pentru snap cu interfata (pentru resize)
+		//align snap coordinates
 		let elementBoundariesY = pieceValidationSet[i].top + gameOffsetY;
 		let elementPositionY = parseInt(elmnt.style.top);
 		let elementBoundariesX = pieceValidationSet[i].left + gameOffsetX;
@@ -37,7 +37,7 @@ function validateMove(elmnt) {
 				}
 
 				elmnt.style.zIndex = 0;
-				elmnt.firstElementChild.classList.add("in-place"); // schimb culoarea si scot eventurile de pe element
+				elmnt.firstElementChild.classList.add("in-place"); // change color and remove events on this element
 
 				if (!Object.keys(player.currentLevelValidationSet).length) { //if the levelvalidationset is empty run validate game
 					validateGame();
@@ -52,7 +52,7 @@ function validateGame() {
 		DragElements.stopDrag();
 		player.levelComplete(currentLevel);
 
-		if (parseInt(currentLevel) !== 1) { //nu pun in baza de date primul nivel (tutorialul)
+		if (parseInt(currentLevel) !== 1) { //tutorial is skipped from db
 			let bestLevelTime = 0;
 			let levelPosition = 0;
 
@@ -61,7 +61,7 @@ function validateGame() {
 				"gamesFinished": player.gamesFinished
 			}
 
-			await Api.userRequest("put", player.name, JSON.stringify(playerObject)) //adug datele player`ului in baza de date (nume, jocuri ramase si finalizate)
+			await Api.userRequest("put", player.name, JSON.stringify(playerObject)) //add player data in db. (player object)
 				.then(data => {
 					GameFinished.setAvgTime(data[1].avgTime)
 					levelPosition = data[2]

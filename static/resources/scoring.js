@@ -1,7 +1,7 @@
-let defaultsRemainingKeys = []; 
+let defaultsRemainingKeys = [];
 (() => { //get levels array for this.defaults.remaining
   Api.getLevelKeysArr()
-   .then(data => defaultsRemainingKeys = data)
+    .then(data => defaultsRemainingKeys = data)
 })()
 
 class Player {
@@ -33,6 +33,16 @@ class Player {
     return currentLevelTime;
   }
 
+  // gets the games that the player finished and the games that he has left and if he does not have newly added levels i add them
+  updateLevels(){
+    let actualLevels = this.gamesRemaining.length + this.gamesFinished.length;
+    if(actualLevels < this.defaults.remaining.length){
+      for(let i = actualLevels + 1; i<= this.defaults.remaining.length; i++){
+        this.gamesRemaining.push(`${i}`);
+      }
+    }
+  }
+
   resetGame() {
     this.gamesRemaining = [...this.defaults.remaining];
     this.gamesFinished = [...this.defaults.finished];
@@ -48,12 +58,12 @@ let LevelSelector = {
 
   nextLevel: function () {
     for (let i = 0; i < player.gamesFinished.length; i++) {
-      if (player.gamesFinished.length !== 0 ) { //&& currentLevel === player.gamesFinished[i].level || currentLevel === 0 // deprecated since skip button
+      if (player.gamesFinished.length !== 0) { //&& currentLevel === player.gamesFinished[i].level || currentLevel === 0 // deprecated since skip button
         this.currentLevel = Math.floor(Math.random() * player.gamesRemaining.length);
         return this.currentLevel;
       }
     }
-  },
+  }
 }
 
 function timer() {

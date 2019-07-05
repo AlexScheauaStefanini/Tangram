@@ -13,15 +13,20 @@ function getAverageLeaderboard() {
 }
 
 function drawLeaderboard(array, level) {
-  if (level == 1) { //remove tutorial levelboard
-    return
-  }
-
   let levelNo; // levelNo that is shown in the leaderboard is taken from the .btn-level on the page
 
   let leaderboard = document.querySelector('.leaderboard');
   let leaderboardTitle = document.querySelector('#leaderboard-title-text')
   let leaderboardComponent = '';
+
+  if (level == 1) { //remove tutorial levelboard
+    document.querySelector('.leaderboard-section').style.display = 'none';
+    document.querySelector('.timer-container').style.visibility = 'hidden';
+    return
+  } else {
+    document.querySelector('.leaderboard-section').style.display = '';
+    document.querySelector('.timer-container').style.visibility = '';
+  }
 
   if (level) {
     levelNo = document.querySelector('.btn-level span').innerText;

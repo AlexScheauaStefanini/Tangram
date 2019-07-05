@@ -6,13 +6,13 @@ let gameOffsetY = document.querySelector("#game").offsetTop;
 let currentLevel = 0;
 let player = '';
 
-function getPlayerNameFromLocal() { //verific daca am nume salvat in localstorage dintr-o sesiune trecuta
+function getPlayerNameFromLocal() { //check if player name is saved in localstorage
 	if (localStorage.name) {
 		document.querySelector('#player-nickname-input').value = localStorage.name;
 	}
 }
 
-document.addEventListener('keypress', function (e) { //listener de enter Key pentru butonul de play
+document.addEventListener('keypress', function (e) { //enter key listener for play btn
 	if (e.key === "Enter" && document.querySelector(".btn-play")) {
 		document.querySelector(".btn-play").click();
 	}
@@ -23,7 +23,7 @@ async function createPlayer() {
 	let playerInput = document.querySelector("#player-nickname-input");
 	let apiUsername = '';
 
-	await fetch(`./api/validate/${playerInput.value}`) //trimit player input la server pentru validare
+	await fetch(`./api/validate/${playerInput.value}`) //player name validation on backend
 		.then(response => response.json())
 		.catch(err => playerInput.classList.add('empty-input'))
 		.then(response => apiUsername = response);
@@ -35,16 +35,17 @@ async function createPlayer() {
 	playerInput.classList.remove('empty-input');
 	nameAddedAnimation();
 
-	playBtn.setAttribute("onclick", ''); //scot functia createPlayer() de pe buton pentru a nu rula functia createPLayer de mai multe ori
+	playBtn.setAttribute("onclick", ''); //playbtn onclick none to not run create player multiple times
 
-	//incerc sa creez user dupa datele din baza de date. daca nu pot creez player nou
+	//try to create player with data from db, else create new player
 	await Api.userRequest("get", apiUsername)
 		.then(response => {
 			if (response) {
 				player = new Player(apiUsername, response.gamesRemaining || [], response.gamesFinished);
 				if (player.gamesRemaining.length === 0) {
 					playBtn.setAttribute("onclick", 'removeCharacterInterface("new")');
-				} else {
+				} else {					
+					player.updateLevels(); //function that makes sure the user has all the levels available
 					playBtn.setAttribute("onclick", 'removeCharacterInterface("next")');
 				}
 			} else {
@@ -58,7 +59,7 @@ async function createPlayer() {
 let levelTimer = '';
 function gameInitialize(game) {
 	if (levelTimer) {
-		levelTimer.stopTimer(); //opresc cronometrul existent daca exista
+		levelTimer.stopTimer(); //stop timer if exists
 	}
 	DragElements.stopDrag();
 
@@ -69,7 +70,7 @@ function gameInitialize(game) {
 	if (game === "new") {
 		player = new Player(player.name);
 		levelTimer = new timer();
-		currentLevel = "1"; //resetez progresul utilizatorului si incep cu tutorialul
+		currentLevel = "1"; //reset player progress
 		levelTimer.startTimer();
 
 	} else if (game === "next") {
@@ -81,9 +82,9 @@ function gameInitialize(game) {
 	try {devOnly()} catch (error) {} //prints internal level number on screen
 
 	Api.getLevelValidationSet(currentLevel)
-		.then(data => player.setCurrentLevelValidationSet(data)); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
+		.then(data => player.setCurrentLevelValidationSet(data)); //initialize player.currentlevelvalidation set with data from backend
 
-	document.querySelector('.leaderboard.player').innerHTML = ''; // sterg ultimul rand din leaderboard
+	document.querySelector('.leaderboard.player').innerHTML = ''; 
 
 	document.querySelector('.btn-name').innerText = player.name;
 	if (player.gamesFinished.length === 0) {
@@ -117,7 +118,7 @@ function resetOffsets() {
 
 let windowWidth = window.innerWidth;
 window.onresize = () => {
-	if (this.innerWidth === windowWidth) { //resetez piesele si offsetul doar daca resizeul este pe width, si nu pe height
+	if (this.innerWidth === windowWidth) { //reset pieces and offsets if resize is on width
 		return;
 	}
 	windowWidth = this.innerWidth;
