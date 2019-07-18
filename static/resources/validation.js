@@ -50,6 +50,7 @@ function validateMove(elmnt) {
 function validateGame() {
 	setTimeout(async () => {
 		DragElements.stopDrag();
+		levelFinishedAnimations();
 		player.levelComplete(currentLevel);
 
 		if (parseInt(currentLevel) !== 1) { //tutorial is skipped from db
@@ -89,7 +90,6 @@ function validateGame() {
 				});
 		}
 
-		levelFinishedAnimations();
 		if (!player.gamesRemaining.length) {
 			GameFinished.createModal();
 		}

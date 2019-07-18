@@ -22,20 +22,23 @@ async function createPlayer() {
 	let playBtn = document.querySelector(".btn-play");
 	let playerInput = document.querySelector("#player-nickname-input");
 	let apiUsername = '';
+	playBtn.setAttribute("onclick", ''); //playbtn onclick none to not run create player multiple times
 
 	await fetch(`./api/validate/${playerInput.value}`) //player name validation on backend
 		.then(response => response.json())
-		.catch(err => playerInput.classList.add('empty-input'))
+		.catch(err => {
+			playBtn.setAttribute("onclick", 'createPlayer()');
+			playerInput.classList.add('empty-input')
+		})
 		.then(response => apiUsername = response);
 
 	if (!apiUsername) {
+		playBtn.setAttribute("onclick", 'createPlayer()');
 		return playerInput.classList.add('empty-input');
 	}
 
 	playerInput.classList.remove('empty-input');
 	nameAddedAnimation();
-
-	playBtn.setAttribute("onclick", ''); //playbtn onclick none to not run create player multiple times
 
 	//try to create player with data from db, else create new player
 	await Api.userRequest("get", apiUsername)

@@ -23,7 +23,7 @@ app.get('/api/validate/:userInput', (req, res) => {
 //get user from Firebase
 app.get('/api/users/:name', async (req, res) => {
   let user = await Database.getUser(req.params.name);
-  levelTimer = new Data.Timer();
+  
   if (user) {
     res.status(200).send(JSON.stringify(user));
   } else {
@@ -33,7 +33,7 @@ app.get('/api/users/:name', async (req, res) => {
 //get levelValidationSet
 app.get('/api/levelvalidationset/:levelNo', (req, res) => {
   let levelValidationSet = Data.getLevelValidationSet(req.params.levelNo);
-
+  levelTimer = new Data.Timer();
   levelTimer.startTimer(); //starts backend Timer - called in main in Api.getlevelvalidationset
 
   if (levelValidationSet) {
