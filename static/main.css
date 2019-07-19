@@ -210,7 +210,7 @@ button.btn:hover{
 }
 
 .btn-play:focus i{
-    animation: roundy 0.5s;
+    animation: roundy 2.5s;
 }
 
 /* NEW PLAYER INTERFACE */
