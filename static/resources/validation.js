@@ -62,7 +62,7 @@ function validateGame() {
 				"gamesFinished": player.gamesFinished
 			}
 
-			await Api.userRequest("put", player.name, JSON.stringify(playerObject)) //add player data in db. (player object)
+			await Api.userRequest("post", player.name, JSON.stringify(playerObject)) //add player data in db. (player object)
 				.then(data => {
 					GameFinished.setAvgTime(data[1].avgTime)
 					levelPosition = data[2]

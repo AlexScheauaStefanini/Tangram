@@ -1,6 +1,6 @@
 class Api {
   static async userRequest(method, player, data) {
-    return await fetch(`./api/users/${player}`, {
+    return await fetch(`/api/users/${player}`, {
       method: method,
       headers: {
         'Content-type': 'application/json'
@@ -15,7 +15,7 @@ class Api {
       player = '';
     }
     
-    return await fetch(`./api/leaderboard/${level}/${player}`, {
+    return await fetch(`/api/leaderboard/${level}/${player}`, {
       method: method,
       headers: {
         'Content-type': 'application/json'
@@ -26,17 +26,17 @@ class Api {
   }
 
   static async avgLeaderboardRequest() {
-    return await fetch(`./api/avgLeaderboard/`)
+    return await fetch(`/api/avgLeaderboard/`)
       .then(response => response.json())
   }
 
   static async getLevelValidationSet(levelNo){
-    return await fetch(`./api/levelvalidationset/${levelNo}`)
+    return await fetch(`/api/levelvalidationset/${levelNo}`)
     .then(response => response.json())
   }
 
   static getLevelKeysArr(){
-    return fetch('./api/levelkeysarray')
+    return fetch('/api/levelkeysarray')
     .then(response => response.json())
   }
 }

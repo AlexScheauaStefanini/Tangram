@@ -24,7 +24,7 @@ async function createPlayer() {
 	let apiUsername = '';
 	playBtn.setAttribute("onclick", ''); //playbtn onclick none to not run create player multiple times
 
-	await fetch(`./api/validate/${playerInput.value}`) //player name validation on backend
+	await fetch(`/api/validate/${playerInput.value}`) //player name validation on backend
 		.then(response => response.json())
 		.catch(err => {
 			playBtn.setAttribute("onclick", 'createPlayer()');

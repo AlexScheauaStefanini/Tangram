@@ -53,7 +53,7 @@ app.get('/api/levelkeysarray', (req,res) => {
 })
 
 // post or put user data and AvgTime on Firebase
-app.put('/api/users/:name', async (req, res) => {
+app.post('/api/users/:name', async (req, res) => {
   let internalTime = levelTimer.stopTimer(); //stops backend timer called in validation in Api.userRequest
   
   req.body.gamesFinished[req.body.gamesFinished.length-1].timeScore = internalTime; //puts backend timer in the data that will be sent to server
