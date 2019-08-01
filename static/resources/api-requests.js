@@ -20,7 +20,7 @@ class Api {
       headers: {
         'Content-type': 'application/json'
       },
-      body: data
+      body: JSON.stringify(data)
     })
       .then(response => response.json())
   }

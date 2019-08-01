@@ -14,16 +14,21 @@ class Player {
 
     this.name = name;
     this.currentLevelValidationSet = {};
+    this.defaultLevelValidationSet = {};
     this.gamesRemaining = gamesRemaining || [...this.defaults.remaining];
     this.gamesFinished = gamesFinished || [...this.defaults.finished];
   }
 
-  setCurrentLevelValidationSet(object) {
-    this.currentLevelValidationSet = JSON.parse(JSON.stringify(object));
+  setDefaultLevelValidationSet(object) {
+    this.defaultLevelValidationSet = JSON.parse(JSON.stringify(object));
+  }
+
+  setCurrentLevelValidationSet(){
+    this.currentLevelValidationSet = JSON.parse(JSON.stringify(this.defaultLevelValidationSet))
   }
 
   levelComplete(currentLevel) {
-    let indexOfCurrentLevel = this.gamesRemaining.indexOf(currentLevel);
+    let indexOfCurrentLevel = this.gamesRemaining.indexOf(parseInt(currentLevel)); //php uses numbers instead of strings
     let currentLevelTime = levelTimer.stopTimer();
     this.gamesRemaining.splice(indexOfCurrentLevel, 1);
     this.gamesFinished.push({
@@ -57,12 +62,10 @@ let LevelSelector = {
   },
 
   nextLevel: function () {
-    for (let i = 0; i < player.gamesFinished.length; i++) {
-      if (player.gamesFinished.length !== 0) { //&& currentLevel === player.gamesFinished[i].level || currentLevel === 0 // deprecated since skip button
+      if (player.gamesFinished.length !== 0) {
         this.currentLevel = Math.floor(Math.random() * player.gamesRemaining.length);
         return this.currentLevel;
       }
-    }
   }
 }
 

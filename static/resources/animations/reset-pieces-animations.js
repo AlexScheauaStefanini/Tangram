@@ -5,8 +5,7 @@ function resetPieces(click) {
 
   Origins.originsRecalculation();
   if(click){
-    Api.getLevelValidationSet(currentLevel)
-        .then(data => player.setCurrentLevelValidationSet(data)); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
+    player.setCurrentLevelValidationSet(); //initializez currentLevelValidation set al obiectului player cu coordonatele care vor vailda nivelul actual
   }
 
   resetButton.setAttribute('onclick', ''); //scot functia de resetPieces de pe buton atata timp cat animatia este in desfasurare

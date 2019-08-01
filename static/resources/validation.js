@@ -48,10 +48,17 @@ function validateMove(elmnt) {
 }
 
 function validateGame() {
+	if (!player.gamesRemaining.length) {
+		GameFinished.createModal();
+	}
 	setTimeout(async () => {
 		DragElements.stopDrag();
 		levelFinishedAnimations();
 		player.levelComplete(currentLevel);
+
+		if(!player.gamesRemaining.length){
+			document.querySelector('#next-level').style.visibility = 'hidden';
+		}
 
 		if (parseInt(currentLevel) !== 1) { //tutorial is skipped from db
 			let bestLevelTime = 0;
@@ -62,7 +69,7 @@ function validateGame() {
 				"gamesFinished": player.gamesFinished
 			}
 
-			await Api.userRequest("post", player.name, JSON.stringify(playerObject)) //add player data in db. (player object)
+			await Api.userRequest("post", player.name, playerObject) //add player data in db. (player object)
 				.then(data => {
 					GameFinished.setAvgTime(data[1].avgTime)
 					levelPosition = data[2]
@@ -90,8 +97,6 @@ function validateGame() {
 				});
 		}
 
-		if (!player.gamesRemaining.length) {
-			GameFinished.createModal();
-		}
+
 	}, 60)
 }

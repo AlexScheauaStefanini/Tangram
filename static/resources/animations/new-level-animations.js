@@ -10,8 +10,13 @@ function newLevelAnimations() {
   gameContainer.classList.add('game-appearing');
   gameContainer.style.opacity = 1;
 
-  timer.classList.add('timer-appearing');
-  timer.style.opacity = 1;
+  if(currentLevel != 1){
+    timer.classList.add('timer-appearing');
+    timer.style.opacity = 1;
+    document.querySelector('.leaderboard-button').classList.remove('leaderboard-button-dissapear')
+  } else {
+    document.querySelector('.leaderboard-button').classList.add('leaderboard-button-dissapear')
+  }
 
   stroke.classList.add('stroke-apearing');
   stroke.style.opacity = 1;
@@ -32,7 +37,6 @@ function newLevelAnimations() {
     }
     pieces[i].style.opacity = 1;
   }
-
 
   document.querySelector("#game").addEventListener('animationend', () => {
     resetOffsets();

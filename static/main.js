@@ -85,7 +85,13 @@ function gameInitialize(game) {
 	try {devOnly()} catch (error) {} //prints internal level number on screen
 
 	Api.getLevelValidationSet(currentLevel)
-		.then(data => player.setCurrentLevelValidationSet(data)); //initialize player.currentlevelvalidation set with data from backend
+		.then(data => {
+			player.setDefaultLevelValidationSet(data);
+			player.setCurrentLevelValidationSet();
+		}); //initialize player.currentlevelvalidation set with data from backend
+		
+
+	leaderboardVisibility(); //check if currentLevel is 1 and hide the entire section
 
 	document.querySelector('.leaderboard.player').innerHTML = ''; 
 

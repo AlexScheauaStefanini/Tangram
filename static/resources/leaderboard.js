@@ -1,7 +1,7 @@
 function getLevelLeaderboard(level) {
   Api.leaderboardRequest('get', level)
     .then(response => {
-      drawLeaderboard(response, level);
+        drawLeaderboard(response, level);
     })
 }
 
@@ -13,20 +13,14 @@ function getAverageLeaderboard() {
 }
 
 function drawLeaderboard(array, level) {
+  if(level == 1) return;
+  
+
   let levelNo; // levelNo that is shown in the leaderboard is taken from the .btn-level on the page
 
   let leaderboard = document.querySelector('.leaderboard');
   let leaderboardTitle = document.querySelector('#leaderboard-title-text')
   let leaderboardComponent = '';
-
-  if (level == 1) { //remove tutorial levelboard
-    document.querySelector('.leaderboard-section').style.display = 'none';
-    document.querySelector('.timer-container').style.visibility = 'hidden';
-    return
-  } else {
-    document.querySelector('.leaderboard-section').style.display = '';
-    document.querySelector('.timer-container').style.visibility = '';
-  }
 
   if (level) {
     levelNo = document.querySelector('.btn-level span').innerText;
@@ -95,4 +89,15 @@ function leaderboardSecondsToMinutes(time, level) {
     return time.split('.').join('<span>s</span> ') + '<span>ms</span>';
   }
 
+}
+
+function leaderboardVisibility(){ 
+  if (currentLevel == 1) { //remove tutorial levelboard
+    document.querySelector('.leaderboard-section').style.display = 'none';
+    document.querySelector('.timer-container').style.visibility = 'hidden';
+    return
+  } else {
+    document.querySelector('.leaderboard-section').style.display = '';
+    document.querySelector('.timer-container').style.visibility = '';
+  }
 }
